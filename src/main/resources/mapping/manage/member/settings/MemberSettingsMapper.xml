@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cheng.zhuo.electronicpos.manage.member.settings.MemberSettingsMapper">
+  <resultMap id="BaseResultMap" type="com.cheng.zhuo.electronicpos.manage.member.settings.MemberSettings">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="store_id" jdbcType="BIGINT" property="storeId" />
+    <result column="is_enable" jdbcType="BIT" property="isEnable" />
+    <result column="enabled_integral_rules" jdbcType="BIT" property="enabledIntegralRules" />
+    <result column="enabled_recharge" jdbcType="BIT" property="enabledRecharge" />
+  </resultMap>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, store_id, is_enable, enabled_integral_rules, enabled_recharge
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_mmb_member_settings
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from t_mmb_member_settings
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.cheng.zhuo.electronicpos.manage.member.settings.MemberSettings">
+    insert into t_mmb_member_settings (id, store_id, is_enable, 
+      enabled_integral_rules, enabled_recharge)
+    values (#{id,jdbcType=BIGINT}, #{storeId,jdbcType=BIGINT}, #{isEnable,jdbcType=BIT}, 
+      #{enabledIntegralRules,jdbcType=BIT}, #{enabledRecharge,jdbcType=BIT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cheng.zhuo.electronicpos.manage.member.settings.MemberSettings">
+    insert into t_mmb_member_settings
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="storeId != null">
+        store_id,
+      </if>
+      <if test="isEnable != null">
+        is_enable,
+      </if>
+      <if test="enabledIntegralRules != null">
+        enabled_integral_rules,
+      </if>
+      <if test="enabledRecharge != null">
+        enabled_recharge,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="storeId != null">
+        #{storeId,jdbcType=BIGINT},
+      </if>
+      <if test="isEnable != null">
+        #{isEnable,jdbcType=BIT},
+      </if>
+      <if test="enabledIntegralRules != null">
+        #{enabledIntegralRules,jdbcType=BIT},
+      </if>
+      <if test="enabledRecharge != null">
+        #{enabledRecharge,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cheng.zhuo.electronicpos.manage.member.settings.MemberSettings">
+    update t_mmb_member_settings
+    <set>
+      <if test="storeId != null">
+        store_id = #{storeId,jdbcType=BIGINT},
+      </if>
+      <if test="isEnable != null">
+        is_enable = #{isEnable,jdbcType=BIT},
+      </if>
+      <if test="enabledIntegralRules != null">
+        enabled_integral_rules = #{enabledIntegralRules,jdbcType=BIT},
+      </if>
+      <if test="enabledRecharge != null">
+        enabled_recharge = #{enabledRecharge,jdbcType=BIT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cheng.zhuo.electronicpos.manage.member.settings.MemberSettings">
+    update t_mmb_member_settings
+    set store_id = #{storeId,jdbcType=BIGINT},
+      is_enable = #{isEnable,jdbcType=BIT},
+      enabled_integral_rules = #{enabledIntegralRules,jdbcType=BIT},
+      enabled_recharge = #{enabledRecharge,jdbcType=BIT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <insert id="updateIntegralRules" parameterType="com.cheng.zhuo.electronicpos.manage.member.settings.IntegralRules">
+    insert into t_mmb_integral_rules ( store_id, expense_amount, integral )
+    values ( #{storeId}, #{expenseAmount}, #{integral})
+  </insert>
+  <delete id="deleteIntegralRules">
+    delete from t_mmb_integral_rules where store_id = #{storeId}
+  </delete>
+  <insert id="updateRecharge" parameterType="list">
+    insert into t_mmb_recharge ( store_id, recharge_amount, present_amount, present_integral )
+    values
+    <foreach collection="list" item="item" index="index" separator=",">
+      (#{item.storeId}, #{item.rechargeAmount}, #{item.presentAmount}, #{item.presentIntegral})
+    </foreach>
+  </insert>
+  <delete id="deleteRecharge">
+    delete from t_mmb_recharge where store_id = #{storeId}
+  </delete>
+  <delete id="deleteMemberSettings">
+    delete from  t_mmb_member_settings where store_id = #{storeId}
+  </delete>
+  <select id="getMemberSettings" resultType="com.cheng.zhuo.electronicpos.manage.member.settings.MemberSettings">
+    select
+    id as id,
+    store_id as storeId,
+    is_enable as isEnable,
+    enabled_integral_rules as enabledIntegralRules,
+    enabled_recharge as enabledRecharge
+    from t_mmb_member_settings where store_id = #{storeId}
+  </select>
+  <select id="getIntegralRules" resultType="com.cheng.zhuo.electronicpos.manage.member.settings.IntegralRules">
+    select
+    id as id,
+    store_id as storeId,
+    expense_amount as expenseAmount,
+    integral as integral
+    from t_mmb_integral_rules where store_id = #{storeId}
+  </select>
+  <select id="getAllRecharge" resultType="com.cheng.zhuo.electronicpos.manage.member.settings.Recharge">
+    select
+    id as id,
+    store_id as storeId,
+    recharge_amount as rechargeAmount,
+    present_amount as presentAmount,
+    present_integral as presentIntegral
+    from t_mmb_recharge where store_id = #{storeId}
+  </select>
+
+  <select id="getAllRechargeByStoreId" resultType="com.cheng.zhuo.electronicpos.manage.member.settings.Recharge">
+    select
+    id as id,
+    store_id as storeId,
+    recharge_amount as rechargeAmount,
+    present_amount as presentAmount,
+    present_integral as presentIntegral
+    from t_mmb_recharge
+    where
+    store_id = #{storeId}
+    order by rechargeAmount
+  </select>
+
+  <select id="selectByStoreId" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_mmb_member_settings
+    where
+    store_id = #{storeId}
+  </select>
+</mapper>

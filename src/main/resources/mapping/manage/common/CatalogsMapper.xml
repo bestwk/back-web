@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cheng.zhuo.electronicpos.manage.common.CatalogsMapper">
+  <resultMap id="BaseResultMap" type="com.cheng.zhuo.electronicpos.manage.common.Catalogs">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="dishes_id" jdbcType="BIGINT" property="dishesId" />
+    <result column="code" jdbcType="VARCHAR" property="code" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="image" jdbcType="VARCHAR" property="image" />
+    <result column="sort" jdbcType="INTEGER" property="sort" />
+    <result column="store_id" jdbcType="VARCHAR" property="storeId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, dishes_id, code, name, image, sort, store_id
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_mds_catalogs
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from t_mds_catalogs
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.cheng.zhuo.electronicpos.manage.common.Catalogs">
+    insert into t_mds_catalogs (id, dishes_id, code, 
+      name, image, sort, 
+      store_id)
+    values (#{id,jdbcType=BIGINT}, #{dishesId,jdbcType=BIGINT}, #{code,jdbcType=VARCHAR}, 
+      #{name,jdbcType=VARCHAR}, #{image,jdbcType=VARCHAR}, #{sort,jdbcType=INTEGER}, 
+      #{storeId,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cheng.zhuo.electronicpos.manage.common.Catalogs">
+    insert into t_mds_catalogs
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="dishesId != null">
+        dishes_id,
+      </if>
+      <if test="code != null">
+        code,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="image != null">
+        image,
+      </if>
+      <if test="sort != null">
+        sort,
+      </if>
+      <if test="storeId != null">
+        store_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="dishesId != null">
+        #{dishesId,jdbcType=BIGINT},
+      </if>
+      <if test="code != null">
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="image != null">
+        #{image,jdbcType=VARCHAR},
+      </if>
+      <if test="sort != null">
+        #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="storeId != null">
+        #{storeId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cheng.zhuo.electronicpos.manage.common.Catalogs">
+    update t_mds_catalogs
+    <set>
+      <if test="dishesId != null">
+        dishes_id = #{dishesId,jdbcType=BIGINT},
+      </if>
+      <if test="code != null">
+        code = #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="image != null">
+        image = #{image,jdbcType=VARCHAR},
+      </if>
+      <if test="sort != null">
+        sort = #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="storeId != null">
+        store_id = #{storeId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cheng.zhuo.electronicpos.manage.common.Catalogs">
+    update t_mds_catalogs
+    set dishes_id = #{dishesId,jdbcType=BIGINT},
+      code = #{code,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      image = #{image,jdbcType=VARCHAR},
+      sort = #{sort,jdbcType=INTEGER},
+      store_id = #{storeId,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <select id="getCatalogsList" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_mds_catalogs
+    where store_id = #{storeId}
+  </select>
+  <select id="findById" resultType="com.cheng.zhuo.electronicpos.manage.common.Catalogs">
+    select
+    <include refid="Base_Column_List" />
+    from t_mds_catalogs
+    where id = #{id}
+  </select>
+</mapper>

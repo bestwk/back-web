@@ -1,0 +1,485 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cheng.zhuo.electronicpos.app.order.AppOrderMapper">
+  <resultMap id="BaseResultMap" type="com.cheng.zhuo.electronicpos.app.order.AppOrder">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="store_id" jdbcType="BIGINT" property="storeId" />
+    <result column="physical_store_id" jdbcType="BIGINT" property="physicalStoreId" />
+    <result column="serial_number" jdbcType="VARCHAR" property="serialNumber" />
+    <result column="order_code" jdbcType="VARCHAR" property="orderCode" />
+    <result column="goods_amount" jdbcType="INTEGER" property="goodsAmount" />
+    <result column="payable_amount" jdbcType="DECIMAL" property="payableAmount" />
+    <result column="store_activity_id" jdbcType="BIGINT" property="storeActivityId" />
+    <result column="store_activity_name" jdbcType="VARCHAR" property="storeActivityName" />
+    <result column="store_activity_amount" jdbcType="DECIMAL" property="storeActivityAmount" />
+    <result column="coupon_id" jdbcType="BIGINT" property="couponId" />
+    <result column="coupon_amount" jdbcType="DECIMAL" property="couponAmount" />
+    <result column="is_vip_pay" jdbcType="BIT" property="isVipPay" />
+    <result column="vip_amount" jdbcType="DECIMAL" property="vipAmount" />
+    <result column="vip_id" jdbcType="BIGINT" property="vipId" />
+    <result column="is_small_money" jdbcType="BIT" property="isSmallMoney" />
+    <result column="small_money_amount" jdbcType="DECIMAL" property="smallMoneyAmount" />
+    <result column="small_money_reason" jdbcType="VARCHAR" property="smallMoneyReason" />
+    <result column="table_id" jdbcType="BIGINT" property="tableId" />
+    <result column="table_name" jdbcType="VARCHAR" property="tableName" />
+    <result column="people_count" jdbcType="INTEGER" property="peopleCount" />
+    <result column="order_placer_type" jdbcType="TINYINT" property="orderPlacerType" />
+    <result column="order_placer_id" jdbcType="BIGINT" property="orderPlacerId" />
+    <result column="order_placer_name" jdbcType="VARCHAR" property="orderPlacerName" />
+    <result column="order_type" jdbcType="TINYINT" property="orderType" />
+    <result column="consignee_name" jdbcType="VARCHAR" property="consigneeName" />
+    <result column="consignee_address" jdbcType="VARCHAR" property="consigneeAddress" />
+    <result column="consignee_phone" jdbcType="VARCHAR" property="consigneePhone" />
+    <result column="pay_type" jdbcType="TINYINT" property="payType" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="pay_time" jdbcType="TIMESTAMP" property="payTime" />
+    <result column="delivery_time" jdbcType="TIMESTAMP" property="deliveryTime" />
+    <result column="finish_time" jdbcType="TIMESTAMP" property="finishTime" />
+    <result column="buyer_memo" jdbcType="VARCHAR" property="buyerMemo" />
+    <result column="saler_memo" jdbcType="VARCHAR" property="salerMemo" />
+    <result column="order_status" jdbcType="TINYINT" property="orderStatus" />
+    <result column="pay_amount" jdbcType="DECIMAL" property="payAmount" />
+    <result column="give_food_amount" jdbcType="DECIMAL" property="giveFoodAmount" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, store_id, physical_store_id, serial_number, order_code, goods_amount, payable_amount, 
+    store_activity_id, store_activity_name, store_activity_amount, coupon_id, coupon_amount, 
+    is_vip_pay, vip_amount, vip_id, is_small_money, small_money_amount, small_money_reason, 
+    table_id, table_name, people_count, order_placer_type, order_placer_id, order_placer_name, 
+    order_type, consignee_name, consignee_address, consignee_phone, pay_type, create_time, 
+    pay_time, delivery_time, finish_time, buyer_memo, saler_memo, order_status, pay_amount, 
+    give_food_amount
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_mds_order
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from t_mds_order
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.cheng.zhuo.electronicpos.app.order.AppOrder" >
+    insert into t_mds_order (id, store_id, physical_store_id,
+      serial_number, order_code, goods_amount,
+      payable_amount, store_activity_id, store_activity_name,
+      store_activity_amount, coupon_id, coupon_amount,
+      is_vip_pay, vip_amount, vip_id,
+      is_small_money, small_money_amount, small_money_reason,
+      table_id, table_name, people_count, 
+      order_placer_type, order_placer_id, order_placer_name, 
+      order_type, consignee_name, consignee_address, 
+      consignee_phone, pay_type, create_time, 
+      pay_time, delivery_time, finish_time, 
+      buyer_memo, saler_memo, order_status, 
+      pay_amount, give_food_amount)
+    values (#{id,jdbcType=BIGINT}, #{storeId,jdbcType=BIGINT}, #{physicalStoreId,jdbcType=BIGINT},
+      #{serialNumber,jdbcType=VARCHAR}, #{orderCode,jdbcType=VARCHAR}, #{goodsAmount,jdbcType=INTEGER}, 
+      #{payableAmount,jdbcType=DECIMAL}, #{storeActivityId,jdbcType=BIGINT}, #{storeActivityName,jdbcType=VARCHAR}, 
+      #{storeActivityAmount,jdbcType=DECIMAL}, #{couponId,jdbcType=BIGINT}, #{couponAmount,jdbcType=DECIMAL}, 
+      #{isVipPay,jdbcType=BIT}, #{vipAmount,jdbcType=DECIMAL}, #{vipId,jdbcType=BIGINT}, 
+      #{isSmallMoney,jdbcType=BIT}, #{smallMoneyAmount,jdbcType=DECIMAL}, #{smallMoneyReason,jdbcType=VARCHAR}, 
+      #{tableId,jdbcType=BIGINT}, #{tableName,jdbcType=VARCHAR}, #{peopleCount,jdbcType=INTEGER}, 
+      #{orderPlacerType,jdbcType=TINYINT}, #{orderPlacerId,jdbcType=BIGINT}, #{orderPlacerName,jdbcType=VARCHAR}, 
+      #{orderType,jdbcType=TINYINT}, #{consigneeName,jdbcType=VARCHAR}, #{consigneeAddress,jdbcType=VARCHAR}, 
+      #{consigneePhone,jdbcType=VARCHAR}, #{payType,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{payTime,jdbcType=TIMESTAMP}, #{deliveryTime,jdbcType=TIMESTAMP}, #{finishTime,jdbcType=TIMESTAMP}, 
+      #{buyerMemo,jdbcType=VARCHAR}, #{salerMemo,jdbcType=VARCHAR}, #{orderStatus,jdbcType=TINYINT}, 
+      #{payAmount,jdbcType=DECIMAL}, #{giveFoodAmount,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cheng.zhuo.electronicpos.app.order.AppOrder" useGeneratedKeys="true"
+      keyProperty="id">
+    insert into t_mds_order
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="storeId != null">
+        store_id,
+      </if>
+      <if test="physicalStoreId != null">
+        physical_store_id,
+      </if>
+      <if test="serialNumber != null">
+        serial_number,
+      </if>
+      <if test="orderCode != null">
+        order_code,
+      </if>
+      <if test="goodsAmount != null">
+        goods_amount,
+      </if>
+      <if test="payableAmount != null">
+        payable_amount,
+      </if>
+      <if test="storeActivityId != null">
+        store_activity_id,
+      </if>
+      <if test="storeActivityName != null">
+        store_activity_name,
+      </if>
+      <if test="storeActivityAmount != null">
+        store_activity_amount,
+      </if>
+      <if test="couponId != null">
+        coupon_id,
+      </if>
+      <if test="couponAmount != null">
+        coupon_amount,
+      </if>
+      <if test="isVipPay != null">
+        is_vip_pay,
+      </if>
+      <if test="vipAmount != null">
+        vip_amount,
+      </if>
+      <if test="vipId != null">
+        vip_id,
+      </if>
+      <if test="isSmallMoney != null">
+        is_small_money,
+      </if>
+      <if test="smallMoneyAmount != null">
+        small_money_amount,
+      </if>
+      <if test="smallMoneyReason != null">
+        small_money_reason,
+      </if>
+      <if test="tableId != null">
+        table_id,
+      </if>
+      <if test="tableName != null">
+        table_name,
+      </if>
+      <if test="peopleCount != null">
+        people_count,
+      </if>
+      <if test="orderPlacerType != null">
+        order_placer_type,
+      </if>
+      <if test="orderPlacerId != null">
+        order_placer_id,
+      </if>
+      <if test="orderPlacerName != null">
+        order_placer_name,
+      </if>
+      <if test="orderType != null">
+        order_type,
+      </if>
+      <if test="consigneeName != null">
+        consignee_name,
+      </if>
+      <if test="consigneeAddress != null">
+        consignee_address,
+      </if>
+      <if test="consigneePhone != null">
+        consignee_phone,
+      </if>
+      <if test="payType != null">
+        pay_type,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="payTime != null">
+        pay_time,
+      </if>
+      <if test="deliveryTime != null">
+        delivery_time,
+      </if>
+      <if test="finishTime != null">
+        finish_time,
+      </if>
+      <if test="buyerMemo != null">
+        buyer_memo,
+      </if>
+      <if test="salerMemo != null">
+        saler_memo,
+      </if>
+      <if test="orderStatus != null">
+        order_status,
+      </if>
+      <if test="payAmount != null">
+        pay_amount,
+      </if>
+      <if test="giveFoodAmount != null">
+        give_food_amount,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="storeId != null">
+        #{storeId,jdbcType=BIGINT},
+      </if>
+      <if test="physicalStoreId != null">
+        #{physicalStoreId,jdbcType=BIGINT},
+      </if>
+      <if test="serialNumber != null">
+        #{serialNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="orderCode != null">
+        #{orderCode,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsAmount != null">
+        #{goodsAmount,jdbcType=INTEGER},
+      </if>
+      <if test="payableAmount != null">
+        #{payableAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="storeActivityId != null">
+        #{storeActivityId,jdbcType=BIGINT},
+      </if>
+      <if test="storeActivityName != null">
+        #{storeActivityName,jdbcType=VARCHAR},
+      </if>
+      <if test="storeActivityAmount != null">
+        #{storeActivityAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="couponId != null">
+        #{couponId,jdbcType=BIGINT},
+      </if>
+      <if test="couponAmount != null">
+        #{couponAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="isVipPay != null">
+        #{isVipPay,jdbcType=BIT},
+      </if>
+      <if test="vipAmount != null">
+        #{vipAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="vipId != null">
+        #{vipId,jdbcType=BIGINT},
+      </if>
+      <if test="isSmallMoney != null">
+        #{isSmallMoney,jdbcType=BIT},
+      </if>
+      <if test="smallMoneyAmount != null">
+        #{smallMoneyAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="smallMoneyReason != null">
+        #{smallMoneyReason,jdbcType=VARCHAR},
+      </if>
+      <if test="tableId != null">
+        #{tableId,jdbcType=BIGINT},
+      </if>
+      <if test="tableName != null">
+        #{tableName,jdbcType=VARCHAR},
+      </if>
+      <if test="peopleCount != null">
+        #{peopleCount,jdbcType=INTEGER},
+      </if>
+      <if test="orderPlacerType != null">
+        #{orderPlacerType,jdbcType=TINYINT},
+      </if>
+      <if test="orderPlacerId != null">
+        #{orderPlacerId,jdbcType=BIGINT},
+      </if>
+      <if test="orderPlacerName != null">
+        #{orderPlacerName,jdbcType=VARCHAR},
+      </if>
+      <if test="orderType != null">
+        #{orderType,jdbcType=TINYINT},
+      </if>
+      <if test="consigneeName != null">
+        #{consigneeName,jdbcType=VARCHAR},
+      </if>
+      <if test="consigneeAddress != null">
+        #{consigneeAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="consigneePhone != null">
+        #{consigneePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="payType != null">
+        #{payType,jdbcType=TINYINT},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="payTime != null">
+        #{payTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deliveryTime != null">
+        #{deliveryTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="finishTime != null">
+        #{finishTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="buyerMemo != null">
+        #{buyerMemo,jdbcType=VARCHAR},
+      </if>
+      <if test="salerMemo != null">
+        #{salerMemo,jdbcType=VARCHAR},
+      </if>
+      <if test="orderStatus != null">
+        #{orderStatus,jdbcType=TINYINT},
+      </if>
+      <if test="payAmount != null">
+        #{payAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="giveFoodAmount != null">
+        #{giveFoodAmount,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cheng.zhuo.electronicpos.app.order.AppOrder">
+    update t_mds_order
+    <set>
+      <if test="storeId != null">
+        store_id = #{storeId,jdbcType=BIGINT},
+      </if>
+      <if test="physicalStoreId != null">
+        physical_store_id = #{physicalStoreId,jdbcType=BIGINT},
+      </if>
+      <if test="serialNumber != null">
+        serial_number = #{serialNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="orderCode != null">
+        order_code = #{orderCode,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsAmount != null">
+        goods_amount = #{goodsAmount,jdbcType=INTEGER},
+      </if>
+      <if test="payableAmount != null">
+        payable_amount = #{payableAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="storeActivityId != null">
+        store_activity_id = #{storeActivityId,jdbcType=BIGINT},
+      </if>
+      <if test="storeActivityName != null">
+        store_activity_name = #{storeActivityName,jdbcType=VARCHAR},
+      </if>
+      <if test="storeActivityAmount != null">
+        store_activity_amount = #{storeActivityAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="couponId != null">
+        coupon_id = #{couponId,jdbcType=BIGINT},
+      </if>
+      <if test="couponAmount != null">
+        coupon_amount = #{couponAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="isVipPay != null">
+        is_vip_pay = #{isVipPay,jdbcType=BIT},
+      </if>
+      <if test="vipAmount != null">
+        vip_amount = #{vipAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="vipId != null">
+        vip_id = #{vipId,jdbcType=BIGINT},
+      </if>
+      <if test="isSmallMoney != null">
+        is_small_money = #{isSmallMoney,jdbcType=BIT},
+      </if>
+      <if test="smallMoneyAmount != null">
+        small_money_amount = #{smallMoneyAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="smallMoneyReason != null">
+        small_money_reason = #{smallMoneyReason,jdbcType=VARCHAR},
+      </if>
+      <if test="tableId != null">
+        table_id = #{tableId,jdbcType=BIGINT},
+      </if>
+      <if test="tableName != null">
+        table_name = #{tableName,jdbcType=VARCHAR},
+      </if>
+      <if test="peopleCount != null">
+        people_count = #{peopleCount,jdbcType=INTEGER},
+      </if>
+      <if test="orderPlacerType != null">
+        order_placer_type = #{orderPlacerType,jdbcType=TINYINT},
+      </if>
+      <if test="orderPlacerId != null">
+        order_placer_id = #{orderPlacerId,jdbcType=BIGINT},
+      </if>
+      <if test="orderPlacerName != null">
+        order_placer_name = #{orderPlacerName,jdbcType=VARCHAR},
+      </if>
+      <if test="orderType != null">
+        order_type = #{orderType,jdbcType=TINYINT},
+      </if>
+      <if test="consigneeName != null">
+        consignee_name = #{consigneeName,jdbcType=VARCHAR},
+      </if>
+      <if test="consigneeAddress != null">
+        consignee_address = #{consigneeAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="consigneePhone != null">
+        consignee_phone = #{consigneePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="payType != null">
+        pay_type = #{payType,jdbcType=TINYINT},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="payTime != null">
+        pay_time = #{payTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deliveryTime != null">
+        delivery_time = #{deliveryTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="finishTime != null">
+        finish_time = #{finishTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="buyerMemo != null">
+        buyer_memo = #{buyerMemo,jdbcType=VARCHAR},
+      </if>
+      <if test="salerMemo != null">
+        saler_memo = #{salerMemo,jdbcType=VARCHAR},
+      </if>
+      <if test="orderStatus != null">
+        order_status = #{orderStatus,jdbcType=TINYINT},
+      </if>
+      <if test="payAmount != null">
+        pay_amount = #{payAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="giveFoodAmount != null">
+        give_food_amount = #{giveFoodAmount,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cheng.zhuo.electronicpos.app.order.AppOrder">
+    update t_mds_order
+    set store_id = #{storeId,jdbcType=BIGINT},
+      physical_store_id = #{physicalStoreId,jdbcType=BIGINT},
+      serial_number = #{serialNumber,jdbcType=VARCHAR},
+      order_code = #{orderCode,jdbcType=VARCHAR},
+      goods_amount = #{goodsAmount,jdbcType=INTEGER},
+      payable_amount = #{payableAmount,jdbcType=DECIMAL},
+      store_activity_id = #{storeActivityId,jdbcType=BIGINT},
+      store_activity_name = #{storeActivityName,jdbcType=VARCHAR},
+      store_activity_amount = #{storeActivityAmount,jdbcType=DECIMAL},
+      coupon_id = #{couponId,jdbcType=BIGINT},
+      coupon_amount = #{couponAmount,jdbcType=DECIMAL},
+      is_vip_pay = #{isVipPay,jdbcType=BIT},
+      vip_amount = #{vipAmount,jdbcType=DECIMAL},
+      vip_id = #{vipId,jdbcType=BIGINT},
+      is_small_money = #{isSmallMoney,jdbcType=BIT},
+      small_money_amount = #{smallMoneyAmount,jdbcType=DECIMAL},
+      small_money_reason = #{smallMoneyReason,jdbcType=VARCHAR},
+      table_id = #{tableId,jdbcType=BIGINT},
+      table_name = #{tableName,jdbcType=VARCHAR},
+      people_count = #{peopleCount,jdbcType=INTEGER},
+      order_placer_type = #{orderPlacerType,jdbcType=TINYINT},
+      order_placer_id = #{orderPlacerId,jdbcType=BIGINT},
+      order_placer_name = #{orderPlacerName,jdbcType=VARCHAR},
+      order_type = #{orderType,jdbcType=TINYINT},
+      consignee_name = #{consigneeName,jdbcType=VARCHAR},
+      consignee_address = #{consigneeAddress,jdbcType=VARCHAR},
+      consignee_phone = #{consigneePhone,jdbcType=VARCHAR},
+      pay_type = #{payType,jdbcType=TINYINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      pay_time = #{payTime,jdbcType=TIMESTAMP},
+      delivery_time = #{deliveryTime,jdbcType=TIMESTAMP},
+      finish_time = #{finishTime,jdbcType=TIMESTAMP},
+      buyer_memo = #{buyerMemo,jdbcType=VARCHAR},
+      saler_memo = #{salerMemo,jdbcType=VARCHAR},
+      order_status = #{orderStatus,jdbcType=TINYINT},
+      pay_amount = #{payAmount,jdbcType=DECIMAL},
+      give_food_amount = #{giveFoodAmount,jdbcType=DECIMAL}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

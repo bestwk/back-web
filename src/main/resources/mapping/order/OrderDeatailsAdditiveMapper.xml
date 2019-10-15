@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cheng.zhuo.electronicpos.manage.order.OrderDeatailsAdditiveMapper">
+  <resultMap id="BaseResultMap" type="com.cheng.zhuo.electronicpos.manage.order.OrderDeatailsAdditive">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="order_detail_id" jdbcType="VARCHAR" property="orderDetailId" />
+    <result column="additive_id" jdbcType="VARCHAR" property="additiveId" />
+    <result column="additive_name" jdbcType="VARCHAR" property="additiveName" />
+    <result column="additive_sales_price" jdbcType="DECIMAL" property="additiveSalesPrice" />
+    <result column="additive_num" jdbcType="VARCHAR" property="additiveNum" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, order_detail_id, additive_id, additive_name, additive_sales_price, additive_num
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_mds_order_deatails_additive
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from t_mds_order_deatails_additive
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.cheng.zhuo.electronicpos.manage.order.OrderDeatailsAdditive">
+    insert into t_mds_order_deatails_additive (id, order_detail_id, additive_id, 
+      additive_name, additive_sales_price, additive_num
+      )
+    values (#{id,jdbcType=BIGINT}, #{orderDetailId,jdbcType=VARCHAR}, #{additiveId,jdbcType=VARCHAR}, 
+      #{additiveName,jdbcType=VARCHAR}, #{additiveSalesPrice,jdbcType=DECIMAL}, #{additiveNum,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.cheng.zhuo.electronicpos.manage.order.OrderDeatailsAdditive">
+    insert into t_mds_order_deatails_additive
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="orderDetailId != null">
+        order_detail_id,
+      </if>
+      <if test="additiveId != null">
+        additive_id,
+      </if>
+      <if test="additiveName != null">
+        additive_name,
+      </if>
+      <if test="additiveSalesPrice != null">
+        additive_sales_price,
+      </if>
+      <if test="additiveNum != null">
+        additive_num,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="orderDetailId != null">
+        #{orderDetailId,jdbcType=VARCHAR},
+      </if>
+      <if test="additiveId != null">
+        #{additiveId,jdbcType=VARCHAR},
+      </if>
+      <if test="additiveName != null">
+        #{additiveName,jdbcType=VARCHAR},
+      </if>
+      <if test="additiveSalesPrice != null">
+        #{additiveSalesPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="additiveNum != null">
+        #{additiveNum,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cheng.zhuo.electronicpos.manage.order.OrderDeatailsAdditive">
+    update t_mds_order_deatails_additive
+    <set>
+      <if test="orderDetailId != null">
+        order_detail_id = #{orderDetailId,jdbcType=VARCHAR},
+      </if>
+      <if test="additiveId != null">
+        additive_id = #{additiveId,jdbcType=VARCHAR},
+      </if>
+      <if test="additiveName != null">
+        additive_name = #{additiveName,jdbcType=VARCHAR},
+      </if>
+      <if test="additiveSalesPrice != null">
+        additive_sales_price = #{additiveSalesPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="additiveNum != null">
+        additive_num = #{additiveNum,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cheng.zhuo.electronicpos.manage.order.OrderDeatailsAdditive">
+    update t_mds_order_deatails_additive
+    set order_detail_id = #{orderDetailId,jdbcType=VARCHAR},
+      additive_id = #{additiveId,jdbcType=VARCHAR},
+      additive_name = #{additiveName,jdbcType=VARCHAR},
+      additive_sales_price = #{additiveSalesPrice,jdbcType=DECIMAL},
+      additive_num = #{additiveNum,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <select id="selectByOrderDetailsId" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_mds_order_deatails_additive
+    where
+    order_detail_id = #{id}
+  </select>
+</mapper>

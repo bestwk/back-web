@@ -1,0 +1,373 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cheng.zhuo.electronicpos.manage.dishes.DishesMapper">
+  <resultMap id="BaseResultMap" type="com.cheng.zhuo.electronicpos.manage.dishes.Dishes">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="physical_store_id" jdbcType="BIGINT" property="physicalStoreId" />
+    <result column="image" jdbcType="VARCHAR" property="image" />
+    <result column="name_cn" jdbcType="VARCHAR" property="nameCn" />
+    <result column="name_en" jdbcType="VARCHAR" property="nameEn" />
+    <result column="catalog_code" jdbcType="VARCHAR" property="catalogCode" />
+    <result column="catalog_name" jdbcType="VARCHAR" property="catalogName" />
+    <result column="unit_code" jdbcType="VARCHAR" property="unitCode" />
+    <result column="unit_name" jdbcType="VARCHAR" property="unitName" />
+    <result column="type_code" jdbcType="VARCHAR" property="typeCode" />
+    <result column="type_name" jdbcType="VARCHAR" property="typeName" />
+    <result column="mnemonic_code" jdbcType="VARCHAR" property="mnemonicCode" />
+    <result column="make_time" jdbcType="VARCHAR" property="makeTime" />
+    <result column="enabled_specifications" jdbcType="BIT" property="enabledSpecifications" />
+    <result column="sort" jdbcType="INTEGER" property="sort" />
+    <result column="box_amount" jdbcType="INTEGER" property="boxAmount" />
+    <result column="enabled_discount" jdbcType="BIT" property="enabledDiscount" />
+    <result column="total_stock" jdbcType="INTEGER" property="totalStock" />
+    <result column="day_stock" jdbcType="INTEGER" property="dayStock" />
+    <result column="order_restriction" jdbcType="INTEGER" property="orderRestriction" />
+    <result column="person_restriction" jdbcType="INTEGER" property="personRestriction" />
+    <result column="sales" jdbcType="INTEGER" property="sales" />
+    <result column="enabled_dine_In" jdbcType="BIT" property="enabledDineIn" />
+    <result column="enabled_take_out" jdbcType="BIT" property="enabledTakeOut" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="dishes_tag" jdbcType="VARCHAR" property="dishesTag" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+    <result column="dishes_status" jdbcType="BIT" property="dishesStatus" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, physical_store_id, image, name_cn, name_en, catalog_code, catalog_name, unit_code, 
+    unit_name, type_code, type_name, mnemonic_code, make_time, enabled_specifications, 
+    sort, box_amount, enabled_discount, total_stock, day_stock, order_restriction, person_restriction, 
+    sales, enabled_dine_In, enabled_take_out, description, status, dishes_status,dishes_tag
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_mds_dishes
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from t_mds_dishes
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insertSelective" parameterType="com.cheng.zhuo.electronicpos.manage.dishes.Dishes">
+    <selectKey resultType="java.lang.Long" keyProperty="id">
+      SELECT LAST_INSERT_ID() AS id
+    </selectKey>
+    insert into t_mds_dishes
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="physicalStoreId != null">
+        physical_store_id,
+      </if>
+      <if test="image != null">
+        image,
+      </if>
+      <if test="nameCn != null">
+        name_cn,
+      </if>
+      <if test="nameEn != null">
+        name_en,
+      </if>
+      <if test="catalogCode != null">
+        catalog_code,
+      </if>
+      <if test="catalogName != null">
+        catalog_name,
+      </if>
+      <if test="unitCode != null">
+        unit_code,
+      </if>
+      <if test="unitName != null">
+        unit_name,
+      </if>
+      <if test="typeCode != null">
+        type_code,
+      </if>
+      <if test="typeName != null">
+        type_name,
+      </if>
+      <if test="mnemonicCode != null">
+        mnemonic_code,
+      </if>
+      <if test="makeTime != null">
+        make_time,
+      </if>
+      <if test="enabledSpecifications != null">
+        enabled_specifications,
+      </if>
+      <if test="sort != null">
+        sort,
+      </if>
+      <if test="boxAmount != null">
+        box_amount,
+      </if>
+      <if test="enabledDiscount != null">
+        enabled_discount,
+      </if>
+      <if test="totalStock != null">
+        total_stock,
+      </if>
+      <if test="dayStock != null">
+        day_stock,
+      </if>
+      <if test="orderRestriction != null">
+        order_restriction,
+      </if>
+      <if test="personRestriction != null">
+        person_restriction,
+      </if>
+      <if test="sales != null">
+        sales,
+      </if>
+      <if test="enabledDineIn != null">
+        enabled_dine_In,
+      </if>
+      <if test="enabledTakeOut != null">
+        enabled_take_out,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="dishesStatus != null">
+      dishes_status,
+    </if>
+      <if test="dishesTag!= null">
+        dishes_tag,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="physicalStoreId != null">
+        #{physicalStoreId,jdbcType=BIGINT},
+      </if>
+      <if test="image != null">
+        #{image,jdbcType=VARCHAR},
+      </if>
+      <if test="nameCn != null">
+        #{nameCn,jdbcType=VARCHAR},
+      </if>
+      <if test="nameEn != null">
+        #{nameEn,jdbcType=VARCHAR},
+      </if>
+      <if test="catalogCode != null">
+        #{catalogCode,jdbcType=VARCHAR},
+      </if>
+      <if test="catalogName != null">
+        #{catalogName,jdbcType=VARCHAR},
+      </if>
+      <if test="unitCode != null">
+        #{unitCode,jdbcType=VARCHAR},
+      </if>
+      <if test="unitName != null">
+        #{unitName,jdbcType=VARCHAR},
+      </if>
+      <if test="typeCode != null">
+        #{typeCode,jdbcType=VARCHAR},
+      </if>
+      <if test="typeName != null">
+        #{typeName,jdbcType=VARCHAR},
+      </if>
+      <if test="mnemonicCode != null">
+        #{mnemonicCode,jdbcType=VARCHAR},
+      </if>
+      <if test="makeTime != null">
+        #{makeTime,jdbcType=VARCHAR},
+      </if>
+      <if test="enabledSpecifications != null">
+        #{enabledSpecifications,jdbcType=BIT},
+      </if>
+      <if test="sort != null">
+        #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="boxAmount != null">
+        #{boxAmount,jdbcType=INTEGER},
+      </if>
+      <if test="enabledDiscount != null">
+        #{enabledDiscount,jdbcType=BIT},
+      </if>
+      <if test="totalStock != null">
+        #{totalStock,jdbcType=INTEGER},
+      </if>
+      <if test="dayStock != null">
+        #{dayStock,jdbcType=INTEGER},
+      </if>
+      <if test="orderRestriction != null">
+        #{orderRestriction,jdbcType=INTEGER},
+      </if>
+      <if test="personRestriction != null">
+        #{personRestriction,jdbcType=INTEGER},
+      </if>
+      <if test="sales != null">
+        #{sales,jdbcType=INTEGER},
+      </if>
+      <if test="enabledDineIn != null">
+        #{enabledDineIn,jdbcType=BIT},
+      </if>
+      <if test="enabledTakeOut != null">
+        #{enabledTakeOut,jdbcType=BIT},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="dishesStatus != null">
+        #{dishesStatus,jdbcType=BIT},
+      </if>
+      <if test="dishesTag != null">
+        #{dishesTag,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cheng.zhuo.electronicpos.manage.dishes.Dishes">
+    update t_mds_dishes
+    <set>
+      <if test="physicalStoreId != null">
+        physical_store_id = #{physicalStoreId,jdbcType=BIGINT},
+      </if>
+      <if test="image != null">
+        image = #{image,jdbcType=VARCHAR},
+      </if>
+      <if test="nameCn != null">
+        name_cn = #{nameCn,jdbcType=VARCHAR},
+      </if>
+      <if test="nameEn != null">
+        name_en = #{nameEn,jdbcType=VARCHAR},
+      </if>
+      <if test="catalogCode != null">
+        catalog_code = #{catalogCode,jdbcType=VARCHAR},
+      </if>
+      <if test="catalogName != null">
+        catalog_name = #{catalogName,jdbcType=VARCHAR},
+      </if>
+      <if test="unitCode != null">
+        unit_code = #{unitCode,jdbcType=VARCHAR},
+      </if>
+      <if test="unitName != null">
+        unit_name = #{unitName,jdbcType=VARCHAR},
+      </if>
+      <if test="typeCode != null">
+        type_code = #{typeCode,jdbcType=VARCHAR},
+      </if>
+      <if test="typeName != null">
+        type_name = #{typeName,jdbcType=VARCHAR},
+      </if>
+      <if test="mnemonicCode != null">
+        mnemonic_code = #{mnemonicCode,jdbcType=VARCHAR},
+      </if>
+      <if test="makeTime != null">
+        make_time = #{makeTime,jdbcType=VARCHAR},
+      </if>
+      <if test="enabledSpecifications != null">
+        enabled_specifications = #{enabledSpecifications,jdbcType=BIT},
+      </if>
+      <if test="sort != null">
+        sort = #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="boxAmount != null">
+        box_amount = #{boxAmount,jdbcType=INTEGER},
+      </if>
+      <if test="enabledDiscount != null">
+        enabled_discount = #{enabledDiscount,jdbcType=BIT},
+      </if>
+      <if test="totalStock != null">
+        total_stock = #{totalStock,jdbcType=INTEGER},
+      </if>
+      <if test="dayStock != null">
+        day_stock = #{dayStock,jdbcType=INTEGER},
+      </if>
+      <if test="orderRestriction != null">
+        order_restriction = #{orderRestriction,jdbcType=INTEGER},
+      </if>
+      <if test="personRestriction != null">
+        person_restriction = #{personRestriction,jdbcType=INTEGER},
+      </if>
+      <if test="sales != null">
+        sales = #{sales,jdbcType=INTEGER},
+      </if>
+      <if test="enabledDineIn != null">
+        enabled_dine_In = #{enabledDineIn,jdbcType=BIT},
+      </if>
+      <if test="enabledTakeOut != null">
+        enabled_take_out = #{enabledTakeOut,jdbcType=BIT},
+      </if>
+      <if test="description != null">
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="dishesStatus != null">
+        dishes_status = #{dishesStatus,jdbcType=BIT},
+      </if>
+      <if test="dishesTag != null">
+        dishes_tag = #{dishesTag,jdbcType=BIT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="findAllList" resultType="com.cheng.zhuo.electronicpos.manage.dishes.Dishes">
+    select * from t_mds_dishes
+    where status != 2
+    <if test="dishesCatalog != ''">
+      and  catalog_code =#{dishesCatalog}
+    </if>
+    <if test="dishesName != ''">
+      and  name_cn like CONCAT('%',#{dishesName},'%')
+    </if>
+    <if test="physicalStoreId != 0">
+      and  physical_store_id =#{physicalStoreId}
+    </if>
+  </select>
+  <select id="findById" resultType="com.cheng.zhuo.electronicpos.manage.dishes.Dishes">
+    select * from t_mds_dishes
+    where id = #{id}
+  </select>
+
+  <delete id="doDeleteBatchResouces">
+    delete from  t_mds_dishes
+    where id in
+    <foreach collection="list"
+             open="("
+             close=")"
+             separator=","
+             item="item">
+      #{item}
+    </foreach>
+  </delete>
+  <select id="selectByDishesId" resultType="com.cheng.zhuo.electronicpos.manage.dishes.Specification">
+    select * from t_mds_specification
+    where dishes_id = #{dishesId}
+  </select>
+  <select id="findTagByName" resultType="com.cheng.zhuo.electronicpos.manage.dishes.Tag">
+    select id,name,taste from t_mds_tag
+    where name = #{name}
+  </select>
+  <select id="findGqList" resultType="com.cheng.zhuo.electronicpos.manage.dishes.Dishes">
+    select * from t_mds_dishes
+    where status = 3
+    <if test="physicalStoreId != 0">
+      and  physical_store_id =#{physicalStoreId}
+    </if>
+  </select>
+  <select id="findCount" resultType="java.lang.Integer">
+    SELECT
+	count( * )
+    FROM
+	t_mds_dishes d
+    WHERE
+	d.id IN ( SELECT dishes_id FROM t_mds_set_meal_dishes WHERE dishes_id = #{id} )
+  </select>
+    <select id="findDishesMeal" resultType="com.cheng.zhuo.electronicpos.manage.meal.SetMealDishes">
+
+    </select>
+    <select id="findDishesCatalogs" resultType="com.cheng.zhuo.electronicpos.manage.common.Catalogs">
+        select * from t_mds_catalogs
+    </select>
+</mapper>

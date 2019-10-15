@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cheng.zhuo.electronicpos.manage.dishes.AdditiveMapper">
+  <resultMap id="BaseResultMap" type="com.cheng.zhuo.electronicpos.manage.dishes.Additive">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="dishes_id" jdbcType="BIGINT" property="dishesId" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="sales_price" jdbcType="DECIMAL" property="salesPrice" />
+    <result column="cost_price" jdbcType="DECIMAL" property="costPrice" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, dishes_id, name, sales_price, cost_price
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_mds_additive
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from t_mds_additive
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.cheng.zhuo.electronicpos.manage.dishes.Additive">
+    insert into t_mds_additive (id, dishes_id, name, 
+      sales_price, cost_price)
+    values (#{id,jdbcType=BIGINT}, #{dishesId,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, 
+      #{salesPrice,jdbcType=DECIMAL}, #{costPrice,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cheng.zhuo.electronicpos.manage.dishes.Additive">
+    insert into t_mds_additive
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="dishesId != null">
+        dishes_id,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="salesPrice != null">
+        sales_price,
+      </if>
+      <if test="costPrice != null">
+        cost_price,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="dishesId != null">
+        #{dishesId,jdbcType=BIGINT},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="salesPrice != null">
+        #{salesPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="costPrice != null">
+        #{costPrice,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cheng.zhuo.electronicpos.manage.dishes.Additive">
+    update t_mds_additive
+    <set>
+      <if test="dishesId != null">
+        dishes_id = #{dishesId,jdbcType=BIGINT},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="salesPrice != null">
+        sales_price = #{salesPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="costPrice != null">
+        cost_price = #{costPrice,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cheng.zhuo.electronicpos.manage.dishes.Additive">
+    update t_mds_additive
+    set dishes_id = #{dishesId,jdbcType=BIGINT},
+      name = #{name,jdbcType=VARCHAR},
+      sales_price = #{salesPrice,jdbcType=DECIMAL},
+      cost_price = #{costPrice,jdbcType=DECIMAL}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="findByDishesId" resultType="com.cheng.zhuo.electronicpos.manage.dishes.Additive">
+    select * from t_mds_additive
+    where dishes_id = #{dishesId}
+  </select>
+  <delete id="deleteByDeshesId">
+    delete from t_mds_additive
+    where dishes_id = #{dishesId}
+  </delete>
+</mapper>

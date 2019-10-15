@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cheng.zhuo.electronicpos.app.tables.AppTablesMapper">
+  <resultMap id="BaseResultMap" type="com.cheng.zhuo.electronicpos.app.tables.AppTables">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="area_id" jdbcType="BIGINT" property="areaId" />
+    <result column="area_name" jdbcType="VARCHAR" property="areaName" />
+    <result column="seating" jdbcType="INTEGER" property="seating" />
+    <result column="minimum_amount" jdbcType="INTEGER" property="minimumAmount" />
+    <result column="table_amount" jdbcType="INTEGER" property="tableAmount" />
+    <result column="seat_amount" jdbcType="INTEGER" property="seatAmount" />
+    <result column="is_special" jdbcType="TINYINT" property="isSpecial" />
+    <result column="special_type" jdbcType="TINYINT" property="specialType" />
+    <result column="is_enabled" jdbcType="BIT" property="isEnabled" />
+    <result column="is_orderdish" jdbcType="TINYINT" property="isOrderdish" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+    <result column="short_chain" jdbcType="VARCHAR" property="shortChain" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, name, area_id, area_name, seating, minimum_amount, table_amount, seat_amount, 
+    is_special, special_type, is_enabled, is_orderdish, status, short_chain
+  </sql>
+  <select id="selectTablesByAreaId" resultType="com.cheng.zhuo.electronicpos.app.tables.AppTables">
+    select 
+    tmt.id,tmt.name,tmt.area_id as areaId,tmt.area_name as areaName,tmt.seating,
+    tmt.minimum_amount as minimumAmount,tmt.table_amount as tableAmount,tmt.seat_amount as seatAmount,
+    tmt.is_special as isSpecial, tmt.special_type as specialType, tmt.is_enabled as isEnabled,
+    tmt.is_orderdish as isOrderdish , tmt.status , tmt.short_chain as shortChain,
+    tmo.id as orderId, tmo.pay_amount as price, tmo.people_count as peopleCount
+    from t_mtb_tables tmt left join t_mds_order tmo on tmt.id = tmo.table_id and 2 > tmo.order_status
+    where tmt.area_id = #{areaId}
+    and tmt.is_enabled = 1
+  </select>
+
+  <update id="updateByPrimaryKey" parameterType="com.cheng.zhuo.electronicpos.app.tables.AppTables">
+    update t_mtb_tables
+    <set>
+      <if test="name != null">
+        name = #{name},
+      </if>
+      <if test="areaId != null">
+        area_id = #{areaId},
+      </if>
+      <if test="areaName != null">
+        area_name = #{areaName},
+      </if>
+      <if test="seating != null">
+        seating = #{seating},
+      </if>
+      <if test="minimumAmount != null">
+        minimum_amount = #{minimumAmount},
+      </if>
+      <if test="tableAmount != null">
+        table_amount = #{tableAmount},
+      </if>
+      <if test="seatAmount != null">
+        seat_amount = #{seatAmount},
+      </if>
+      <if test="isSpecial != null">
+        is_special = #{isSpecial},
+      </if>
+      <if test="specialType != null">
+        special_type = #{specialType},
+      </if>
+      <if test="isEnabled != null">
+        is_enabled = #{isEnabled},
+      </if>
+      <if test="isOrderdish != null">
+        is_orderdish = #{isOrderdish},
+      </if>
+      <if test="status != null">
+        status = #{status},
+      </if>
+      <if test="shortChain != null">
+        short_chain = #{shortChain},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

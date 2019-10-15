@@ -1,0 +1,95 @@
+server:
+  #端口号
+  port: 60808
+spring:
+  datasource:
+    username: root
+    password: cheng.zhuo
+    name: mysql
+    type: com.zaxxer.hikari.HikariDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+#    url: jdbc:mysql://127.0.0.1:3306/zocoo_learn?useUnicode=true&characterEncoding=utf8&serverTimezone=GMT
+    url: jdbc:mysql://192.168.0.250:1158/electronic_pos?useUnicode=true&characterEncoding=utf8&serverTimezone=GMT
+    mybatis-plus:
+      mapper-locations=classpath: com/cheng/zhuo/electronicpos/generate/mapper/xml/*.xml
+    hikari:
+      connection-timeout: 30000
+      auto-commit: true
+      max-lifetime: 1800000
+      pool-name: DatebookHikariCP
+      minimum-idle: 5
+      connection-test-query: SELECT 1
+      maximum-pool-size: 15
+      idle-timeout: 30000
+  redis:
+    database: 11
+    # Redis服务器地址
+    host: 127.0.0.1
+    # Redis服务器连接端口
+    port: 6379
+    # Redis服务器连接密码（默认为空）
+    password:
+    # 连接池最大连接数（使用负值表示没有限制）
+    jedis:
+      pool:
+        max-active: 200
+        # 连接池最大阻塞等待时间（使用负值表示没有限制）
+        max-wait: -1
+        # 连接池中的最大空闲连接
+        max-idle: 10
+        # 连接池中的最小空闲连接
+        min-idle: 0
+    # 连接超时时间（毫秒）
+    timeout: 10000
+  #pagehelper:
+#  offset-as-page-num: true
+#  reasonable: true
+#  support-methods-arguments: false
+#  page-size-zero: true
+#  helper-dialect: mysql
+#  row-bounds-with-count: true
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 100MB
+web:
+#  upload-path: E:\apache-tomcat-6.0.16-images\webapps\images_web\zocoo
+  upload-path: E:\software\tomcat7.0\webapps\
+aliyun:
+  access-key-id: LTAIfWO7KCAuTkdZ
+  access-key-secret: ygVrUnyzrIdDI5PktG6jxcrcp6vZwa
+  bucket: pay-video
+  endpoint: oss-cn-shenzhen.aliyuncs.com
+
+pagehelper:
+  offset-as-page-num: true
+  reasonable: true
+  support-methods-arguments: false
+  page-size-zero: true
+  helper-dialect: mysql
+  row-bounds-with-count: true
+
+mybatis:
+  config-location: classpath:mybatis-config.xml
+  mapper-locations: classpath:mapping/**/*.xml
+logging:
+  level:
+    com:
+      cheng:
+        zhuo:
+          collegezhuo:
+            dao: DEBUG
+  config: classpath:logback-spring.xml
+j2cache:
+  config-location: classpath:/j2cache.properties
+
+
+  spring:
+    freemarker:
+      expose-request-attributes: false
+      expose-session-attributes: false
+      content-type: text/html
+      expose-spring-macro-helpers: false
+      suffix: .ftl
+
+  # Redis数据库索引（默认为0）

@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cheng.zhuo.electronicpos.manage.dishes.SpecificationMapper">
+  <resultMap id="BaseResultMap" type="com.cheng.zhuo.electronicpos.manage.dishes.Specification">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="dishes_id" jdbcType="BIGINT" property="dishesId" />
+    <result column="type" jdbcType="TINYINT" property="type" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="sales_price" jdbcType="DECIMAL" property="salesPrice" />
+    <result column="original_price" jdbcType="DECIMAL" property="originalPrice" />
+    <result column="cost_price" jdbcType="DECIMAL" property="costPrice" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, dishes_id, type, name, sales_price, original_price, cost_price
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_mds_specification
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from t_mds_specification
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.cheng.zhuo.electronicpos.manage.dishes.Specification">
+    insert into t_mds_specification (id, dishes_id, type, 
+      name, sales_price, original_price, 
+      cost_price)
+    values (#{id,jdbcType=BIGINT}, #{dishesId,jdbcType=BIGINT}, #{type,jdbcType=TINYINT}, 
+      #{name,jdbcType=VARCHAR}, #{salesPrice,jdbcType=DECIMAL}, #{originalPrice,jdbcType=DECIMAL}, 
+      #{costPrice,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cheng.zhuo.electronicpos.manage.dishes.Specification">
+    insert into t_mds_specification
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="dishesId != null">
+        dishes_id,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="salesPrice != null">
+        sales_price,
+      </if>
+      <if test="originalPrice != null">
+        original_price,
+      </if>
+      <if test="costPrice != null">
+        cost_price,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="dishesId != null">
+        #{dishesId,jdbcType=BIGINT},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=TINYINT},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="salesPrice != null">
+        #{salesPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="originalPrice != null">
+        #{originalPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="costPrice != null">
+        #{costPrice,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cheng.zhuo.electronicpos.manage.dishes.Specification">
+    update t_mds_specification
+    <set>
+      <if test="dishesId != null">
+        dishes_id = #{dishesId,jdbcType=BIGINT},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=TINYINT},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="salesPrice != null">
+        sales_price = #{salesPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="originalPrice != null">
+        original_price = #{originalPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="costPrice != null">
+        cost_price = #{costPrice,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cheng.zhuo.electronicpos.manage.dishes.Specification">
+    update t_mds_specification
+    set dishes_id = #{dishesId,jdbcType=BIGINT},
+      type = #{type,jdbcType=TINYINT},
+      name = #{name,jdbcType=VARCHAR},
+      sales_price = #{salesPrice,jdbcType=DECIMAL},
+      original_price = #{originalPrice,jdbcType=DECIMAL},
+      cost_price = #{costPrice,jdbcType=DECIMAL}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="findByDishesId" resultType="com.cheng.zhuo.electronicpos.manage.dishes.Specification">
+    select * from t_mds_specification
+    where dishes_id = #{dishesId}
+  </select>
+  <delete id="deleteByDishesId">
+    delete from t_mds_specification
+    where dishes_id = #{dishesId}
+  </delete>
+</mapper>

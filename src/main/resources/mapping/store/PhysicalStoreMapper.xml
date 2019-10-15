@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cheng.zhuo.electronicpos.manage.store.PhysicalStoreMapper">
+  <resultMap id="BaseResultMap" type="com.cheng.zhuo.electronicpos.manage.store.PhysicalStore">
+    <id column="id"  property="id" />
+    <result column="store_id" jdbcType="BIGINT" property="storeId" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="manager" jdbcType="VARCHAR" property="manager" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="catering_type_code" jdbcType="VARCHAR" property="cateringTypeCode" />
+    <result column="catering_type_name" jdbcType="VARCHAR" property="cateringTypeName" />
+    <result column="shop_type_code" jdbcType="VARCHAR" property="shopTypeCode" />
+    <result column="shop_type_name" jdbcType="VARCHAR" property="shopTypeName" />
+    <result column="province_code" jdbcType="VARCHAR" property="provinceCode" />
+    <result column="province_name" jdbcType="VARCHAR" property="provinceName" />
+    <result column="city_code" jdbcType="VARCHAR" property="cityCode" />
+    <result column="city_name" jdbcType="VARCHAR" property="cityName" />
+    <result column="district_code" jdbcType="VARCHAR" property="districtCode" />
+    <result column="district_name" jdbcType="VARCHAR" property="districtName" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="latitude" jdbcType="DECIMAL" property="latitude" />
+    <result column="longitude" jdbcType="DECIMAL" property="longitude" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+    <result column="jrsr"  property="jrsr" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, store_id, name, manager, phone, catering_type_code, catering_type_name, shop_type_code, 
+    shop_type_name, province_code, province_name, city_code, city_name, district_code, 
+    district_name, address, latitude, longitude, description, status
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_mps_physical_store
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from t_mps_physical_store
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.cheng.zhuo.electronicpos.manage.store.PhysicalStore">
+    insert into t_mps_physical_store (id, store_id, name, 
+      manager, phone, catering_type_code, 
+      catering_type_name, shop_type_code, shop_type_name, 
+      province_code, province_name, city_code, 
+      city_name, district_code, district_name, 
+      address, latitude, longitude, 
+      description, status)
+    values (#{id,jdbcType=BIGINT}, #{storeId,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, 
+      #{manager,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{cateringTypeCode,jdbcType=VARCHAR}, 
+      #{cateringTypeName,jdbcType=VARCHAR}, #{shopTypeCode,jdbcType=VARCHAR}, #{shopTypeName,jdbcType=VARCHAR}, 
+      #{provinceCode,jdbcType=VARCHAR}, #{provinceName,jdbcType=VARCHAR}, #{cityCode,jdbcType=VARCHAR}, 
+      #{cityName,jdbcType=VARCHAR}, #{districtCode,jdbcType=VARCHAR}, #{districtName,jdbcType=VARCHAR}, 
+      #{address,jdbcType=VARCHAR}, #{latitude,jdbcType=DECIMAL}, #{longitude,jdbcType=DECIMAL}, 
+      #{description,jdbcType=VARCHAR}, #{status,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cheng.zhuo.electronicpos.manage.store.PhysicalStore">
+    insert into t_mps_physical_store
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="storeId != null">
+        store_id,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="manager != null">
+        manager,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="cateringTypeCode != null">
+        catering_type_code,
+      </if>
+      <if test="cateringTypeName != null">
+        catering_type_name,
+      </if>
+      <if test="shopTypeCode != null">
+        shop_type_code,
+      </if>
+      <if test="shopTypeName != null">
+        shop_type_name,
+      </if>
+      <if test="provinceCode != null">
+        province_code,
+      </if>
+      <if test="provinceName != null">
+        province_name,
+      </if>
+      <if test="cityCode != null">
+        city_code,
+      </if>
+      <if test="cityName != null">
+        city_name,
+      </if>
+      <if test="districtCode != null">
+        district_code,
+      </if>
+      <if test="districtName != null">
+        district_name,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+      <if test="latitude != null">
+        latitude,
+      </if>
+      <if test="longitude != null">
+        longitude,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="storeId != null">
+        #{storeId,jdbcType=BIGINT},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="manager != null">
+        #{manager,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="cateringTypeCode != null">
+        #{cateringTypeCode,jdbcType=VARCHAR},
+      </if>
+      <if test="cateringTypeName != null">
+        #{cateringTypeName,jdbcType=VARCHAR},
+      </if>
+      <if test="shopTypeCode != null">
+        #{shopTypeCode,jdbcType=VARCHAR},
+      </if>
+      <if test="shopTypeName != null">
+        #{shopTypeName,jdbcType=VARCHAR},
+      </if>
+      <if test="provinceCode != null">
+        #{provinceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="provinceName != null">
+        #{provinceName,jdbcType=VARCHAR},
+      </if>
+      <if test="cityCode != null">
+        #{cityCode,jdbcType=VARCHAR},
+      </if>
+      <if test="cityName != null">
+        #{cityName,jdbcType=VARCHAR},
+      </if>
+      <if test="districtCode != null">
+        #{districtCode,jdbcType=VARCHAR},
+      </if>
+      <if test="districtName != null">
+        #{districtName,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="latitude != null">
+        #{latitude,jdbcType=DECIMAL},
+      </if>
+      <if test="longitude != null">
+        #{longitude,jdbcType=DECIMAL},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cheng.zhuo.electronicpos.manage.store.PhysicalStore">
+    update t_mps_physical_store
+    <set>
+      <if test="storeId != null">
+        store_id = #{storeId,jdbcType=BIGINT},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="manager != null">
+        manager = #{manager,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="cateringTypeCode != null">
+        catering_type_code = #{cateringTypeCode,jdbcType=VARCHAR},
+      </if>
+      <if test="cateringTypeName != null">
+        catering_type_name = #{cateringTypeName,jdbcType=VARCHAR},
+      </if>
+      <if test="shopTypeCode != null">
+        shop_type_code = #{shopTypeCode,jdbcType=VARCHAR},
+      </if>
+      <if test="shopTypeName != null">
+        shop_type_name = #{shopTypeName,jdbcType=VARCHAR},
+      </if>
+      <if test="provinceCode != null">
+        province_code = #{provinceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="provinceName != null">
+        province_name = #{provinceName,jdbcType=VARCHAR},
+      </if>
+      <if test="cityCode != null">
+        city_code = #{cityCode,jdbcType=VARCHAR},
+      </if>
+      <if test="cityName != null">
+        city_name = #{cityName,jdbcType=VARCHAR},
+      </if>
+      <if test="districtCode != null">
+        district_code = #{districtCode,jdbcType=VARCHAR},
+      </if>
+      <if test="districtName != null">
+        district_name = #{districtName,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="latitude != null">
+        latitude = #{latitude,jdbcType=DECIMAL},
+      </if>
+      <if test="longitude != null">
+        longitude = #{longitude,jdbcType=DECIMAL},
+      </if>
+      <if test="description != null">
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=TINYINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cheng.zhuo.electronicpos.manage.store.PhysicalStore">
+    update t_mps_physical_store
+    set store_id = #{storeId,jdbcType=BIGINT},
+      name = #{name,jdbcType=VARCHAR},
+      manager = #{manager,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      catering_type_code = #{cateringTypeCode,jdbcType=VARCHAR},
+      catering_type_name = #{cateringTypeName,jdbcType=VARCHAR},
+      shop_type_code = #{shopTypeCode,jdbcType=VARCHAR},
+      shop_type_name = #{shopTypeName,jdbcType=VARCHAR},
+      province_code = #{provinceCode,jdbcType=VARCHAR},
+      province_name = #{provinceName,jdbcType=VARCHAR},
+      city_code = #{cityCode,jdbcType=VARCHAR},
+      city_name = #{cityName,jdbcType=VARCHAR},
+      district_code = #{districtCode,jdbcType=VARCHAR},
+      district_name = #{districtName,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      latitude = #{latitude,jdbcType=DECIMAL},
+      longitude = #{longitude,jdbcType=DECIMAL},
+      description = #{description,jdbcType=VARCHAR},
+      status = #{status,jdbcType=TINYINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="getPhysicalStoreList" resultMap="BaseResultMap">
+    select
+    a.id as id,a.name as name,a.manager as manager, a.status as status,
+    IFNULL((select sum(o.payable_amount) from t_mds_order  o where o.physical_store_id = a.id and  TO_DAYS(o.finish_time) = TO_DAYS(NOW())),'0')  as jrsr
+    from
+    t_mps_physical_store a
+    where
+    store_id = #{storeId}
+    and
+    is_headquarters =0
+    <if test="name != null and name!='' ">
+      and name like CONCAT('%', #{name}, '%')
+    </if>
+    <if test="phone != null and phone!='' ">
+      and phone = #{phone}
+    </if>
+  </select>
+
+  <select id="getPhysicalStoreListByStoreId" resultMap="BaseResultMap">
+ select
+    <include refid="Base_Column_List" />
+    from
+    t_mps_physical_store a
+    where
+    store_id = #{storeId}
+--     and
+--     is_headquarters =0
+  </select>
+</mapper>

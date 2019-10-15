@@ -1,0 +1,334 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cheng.zhuo.electronicpos.manage.order.OrderDeatailsMapper">
+    <resultMap id="BaseResultMap" type="com.cheng.zhuo.electronicpos.manage.order.OrderDeatails">
+        <id column="id" jdbcType="BIGINT" property="id" />
+        <result column="order_id" jdbcType="BIGINT" property="orderId" />
+        <result column="dishes_id" jdbcType="BIGINT" property="dishesId" />
+        <result column="dishes_name" jdbcType="VARCHAR" property="dishesName" />
+        <result column="dishes_num" jdbcType="INTEGER" property="dishesNum" />
+        <result column="spec_attr" jdbcType="VARCHAR" property="specAttr" />
+        <result column="spec_attr_id" jdbcType="VARCHAR" property="specAttrId" />
+        <result column="catalogs_id" jdbcType="VARCHAR" property="catalogsId" />
+        <result column="dishes_tag" jdbcType="VARCHAR" property="dishesTag" />
+        <result column="price" jdbcType="DECIMAL" property="price" />
+        <result column="give_num" jdbcType="INTEGER" property="giveNum" />
+        <result column="rejected_amount" jdbcType="INTEGER" property="rejectedAmount" />
+        <result column="subtotal" jdbcType="DECIMAL" property="subtotal" />
+        <result column="status" jdbcType="TINYINT" property="status" />
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, order_id, dishes_id, dishes_name, dishes_num, spec_attr, spec_attr_id, catalogs_id,
+    dishes_tag, price, give_num, rejected_amount, subtotal, status, create_time
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from t_mds_order_deatails
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from t_mds_order_deatails
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+    <insert id="insert" parameterType="com.cheng.zhuo.electronicpos.manage.order.OrderDeatails">
+    insert into t_mds_order_deatails (id, order_id, dishes_id,
+      dishes_name, dishes_num, spec_attr,
+      spec_attr_id, catalogs_id, dishes_tag,
+      price, give_num, rejected_amount,
+      subtotal, status, create_time
+      )
+    values (#{id,jdbcType=BIGINT}, #{orderId,jdbcType=BIGINT}, #{dishesId,jdbcType=BIGINT},
+      #{dishesName,jdbcType=VARCHAR}, #{dishesNum,jdbcType=INTEGER}, #{specAttr,jdbcType=VARCHAR},
+      #{specAttrId,jdbcType=VARCHAR}, #{catalogsId,jdbcType=VARCHAR}, #{dishesTag,jdbcType=VARCHAR},
+      #{price,jdbcType=DECIMAL}, #{giveNum,jdbcType=INTEGER}, #{rejectedAmount,jdbcType=INTEGER},
+      #{subtotal,jdbcType=DECIMAL}, #{status,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+    <insert id="insertSelective" parameterType="com.cheng.zhuo.electronicpos.manage.order.OrderDeatails">
+        insert into t_mds_order_deatails
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="orderId != null">
+                order_id,
+            </if>
+            <if test="dishesId != null">
+                dishes_id,
+            </if>
+            <if test="dishesName != null">
+                dishes_name,
+            </if>
+            <if test="dishesNum != null">
+                dishes_num,
+            </if>
+            <if test="specAttr != null">
+                spec_attr,
+            </if>
+            <if test="specAttrId != null">
+                spec_attr_id,
+            </if>
+            <if test="catalogsId != null">
+                catalogs_id,
+            </if>
+            <if test="dishesTag != null">
+                dishes_tag,
+            </if>
+            <if test="price != null">
+                price,
+            </if>
+            <if test="giveNum != null">
+                give_num,
+            </if>
+            <if test="rejectedAmount != null">
+                rejected_amount,
+            </if>
+            <if test="subtotal != null">
+                subtotal,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="orderId != null">
+                #{orderId,jdbcType=BIGINT},
+            </if>
+            <if test="dishesId != null">
+                #{dishesId,jdbcType=BIGINT},
+            </if>
+            <if test="dishesName != null">
+                #{dishesName,jdbcType=VARCHAR},
+            </if>
+            <if test="dishesNum != null">
+                #{dishesNum,jdbcType=INTEGER},
+            </if>
+            <if test="specAttr != null">
+                #{specAttr,jdbcType=VARCHAR},
+            </if>
+            <if test="specAttrId != null">
+                #{specAttrId,jdbcType=VARCHAR},
+            </if>
+            <if test="catalogsId != null">
+                #{catalogsId,jdbcType=VARCHAR},
+            </if>
+            <if test="dishesTag != null">
+                #{dishesTag,jdbcType=VARCHAR},
+            </if>
+            <if test="price != null">
+                #{price,jdbcType=DECIMAL},
+            </if>
+            <if test="giveNum != null">
+                #{giveNum,jdbcType=INTEGER},
+            </if>
+            <if test="rejectedAmount != null">
+                #{rejectedAmount,jdbcType=INTEGER},
+            </if>
+            <if test="subtotal != null">
+                #{subtotal,jdbcType=DECIMAL},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=TINYINT},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.cheng.zhuo.electronicpos.manage.order.OrderDeatails">
+        update t_mds_order_deatails
+        <set>
+            <if test="orderId != null">
+                order_id = #{orderId,jdbcType=BIGINT},
+            </if>
+            <if test="dishesId != null">
+                dishes_id = #{dishesId,jdbcType=BIGINT},
+            </if>
+            <if test="dishesName != null">
+                dishes_name = #{dishesName,jdbcType=VARCHAR},
+            </if>
+            <if test="dishesNum != null">
+                dishes_num = #{dishesNum,jdbcType=INTEGER},
+            </if>
+            <if test="specAttr != null">
+                spec_attr = #{specAttr,jdbcType=VARCHAR},
+            </if>
+            <if test="specAttrId != null">
+                spec_attr_id = #{specAttrId,jdbcType=VARCHAR},
+            </if>
+            <if test="catalogsId != null">
+                catalogs_id = #{catalogsId,jdbcType=VARCHAR},
+            </if>
+            <if test="dishesTag != null">
+                dishes_tag = #{dishesTag,jdbcType=VARCHAR},
+            </if>
+            <if test="price != null">
+                price = #{price,jdbcType=DECIMAL},
+            </if>
+            <if test="giveNum != null">
+                give_num = #{giveNum,jdbcType=INTEGER},
+            </if>
+            <if test="rejectedAmount != null">
+                rejected_amount = #{rejectedAmount,jdbcType=INTEGER},
+            </if>
+            <if test="subtotal != null">
+                subtotal = #{subtotal,jdbcType=DECIMAL},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=TINYINT},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.cheng.zhuo.electronicpos.manage.order.OrderDeatails">
+    update t_mds_order_deatails
+    set order_id = #{orderId,jdbcType=BIGINT},
+      dishes_id = #{dishesId,jdbcType=BIGINT},
+      dishes_name = #{dishesName,jdbcType=VARCHAR},
+      dishes_num = #{dishesNum,jdbcType=INTEGER},
+      spec_attr = #{specAttr,jdbcType=VARCHAR},
+      spec_attr_id = #{specAttrId,jdbcType=VARCHAR},
+      catalogs_id = #{catalogsId,jdbcType=VARCHAR},
+      dishes_tag = #{dishesTag,jdbcType=VARCHAR},
+      price = #{price,jdbcType=DECIMAL},
+      give_num = #{giveNum,jdbcType=INTEGER},
+      rejected_amount = #{rejectedAmount,jdbcType=INTEGER},
+      subtotal = #{subtotal,jdbcType=DECIMAL},
+      status = #{status,jdbcType=TINYINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <select id="selectByOrderId" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_mds_order_deatails
+    where order_id = #{orderId}
+  </select>
+  
+  <select id="selectFoodList" resultType="hashmap">
+    select
+    a.dishes_name as dishesName,
+    sum(a.subtotal) as subtotal,
+    b.name as catelogsName,
+    sum(a.dishes_num) as dishesNum,
+    sum(a.give_num) as giveNum
+    from
+    t_mds_order_deatails a
+    left join
+    t_mds_catalogs b
+    on
+    a.catalogs_id = b.id
+    left join
+    t_mds_order c
+    on c.id = a.order_id
+    where
+    c.store_id = #{storeId}
+    and c.order_status = 7
+    <if test="startTime != null and startTime!=''">
+     and  c.create_time >=#{startTime}
+    </if>
+    <if test="endTime != null and endTime!=''">
+      and   #{endTime} >= c.create_time
+    </if>
+    <if test="physicalStoreIdList != null and physicalStoreIdList!=''">
+      and c.physical_store_id in
+        <foreach collection="physicalStoreIdList" index="index" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </if>
+    <if test="catalogsIdList != null and catalogsIdList!=''">
+      and b.id in
+        <foreach collection="catalogsIdList" index="index" item="item" open="(" separator="," close=")">
+          #{item}
+        </foreach>
+    </if>
+      group by a.dishes_id
+  </select>
+    
+    <select id="selectFoodTotal" resultType="String">
+        select
+        sum(a.subtotal) as subtotal
+        from
+        t_mds_order_deatails a
+        left join
+        t_mds_catalogs b
+        on
+        a.catalogs_id = b.id
+        left join
+        t_mds_order c
+        on c.id = a.order_id
+        where
+        c.store_id = #{storeId}
+        and c.order_status = 7
+        <if test="startTime != null and startTime!=''">
+          and   c.create_time >=#{startTime}
+        </if>
+        <if test="endTime != null and endTime!=''">
+          and   #{endTime} >= c.create_time
+        </if>
+        <if test="physicalStoreIdList != null and physicalStoreIdList!=''">
+            and c.physical_store_id in
+            <foreach collection="physicalStoreIdList" index="index" item="item" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+        </if>
+        <if test="catalogsIdList != null and catalogsIdList!=''">
+            and b.id in
+            <foreach collection="catalogsIdList" index="index" item="item" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+        </if>
+    </select>
+
+    <select id="selectTagList" resultType="hashmap">
+        select
+        a.dishes_name as dishesName,
+        sum(a.subtotal) as subtotal,
+        b.name as catelogsName,
+        sum(a.dishes_num) as dishesNum,
+        sum(a.give_num) as giveNum
+        from
+        t_mds_order_deatails a
+        left join
+        t_mds_catalogs b
+        on
+        a.catalogs_id = b.id
+        left join
+        t_mds_order c
+        on c.id = a.order_id
+        where
+        c.store_id = #{storeId}
+        and c.order_status = 7
+        <if test="startTime != null and startTime!=''">
+            and  c.create_time >=#{startTime}
+        </if>
+        <if test="endTime != null and endTime!=''">
+            and   #{endTime} >= c.create_time
+        </if>
+        <if test="physicalStoreIdList != null and physicalStoreIdList!=''">
+            and c.physical_store_id in
+            <foreach collection="physicalStoreIdList" index="index" item="item" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+        </if>
+        <if test="catalogsIdList != null and catalogsIdList!=''">
+            and b.id in
+            <foreach collection="catalogsIdList" index="index" item="item" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+        </if>
+        group by a.catalogs_id
+    </select>
+</mapper>

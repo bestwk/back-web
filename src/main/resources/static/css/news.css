@@ -1,0 +1,74 @@
+*{margin:0; padding:0; font-family:"微软雅黑"; box-sizing: border-box}
+body{max-width:100%; margin:0 auto; overflow-x:hidden;}
+a{text-decoration:none;}
+a img{border:0;}
+.clear{clear:both;}
+
+.wrap{width:100%; height:auto;}
+/*新闻详情*/
+.article{width:96%; margin:0 auto;}
+.article_title{width:100%; height:auto; line-height:24px; font-size:18px; text-align:center; margin:10px auto 30px;}
+.article_author{float:left; font-size:12px; color:#404040; line-height:24px;}
+.article_time{float:right; font-size:12px; color:#404040; line-height:24px;}
+.article_content{width:100%; height:auto; margin-top:10px;}
+.article_content p{font-size:14px; color:#404040; line-height:24px;}
+.article_content img{max-width: 100%;}
+
+/*text-indent:0 !important;*/
+
+/* table 样式 */
+table {
+    border-top: 1px solid #ccc;
+    border-left: 1px solid #ccc;
+}
+table td,
+table th {
+    border-bottom: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+    padding: 3px 5px;
+}
+table th {
+    border-bottom: 2px solid #ccc;
+    text-align: center;
+}
+
+/* blockquote 样式 */
+blockquote {
+    display: block;
+    border-left: 8px solid #d0e5f2;
+    padding: 5px 10px;
+    margin: 10px 0;
+    line-height: 1.4;
+    font-size: 100%;
+    background-color: #f1f1f1;
+}
+
+/* code 样式 */
+code {
+    display: inline-block;
+    *display: inline;
+    *zoom: 1;
+    background-color: #f1f1f1;
+    border-radius: 3px;
+    padding: 3px 5px;
+    margin: 0 3px;
+}
+pre code {
+    display: block;
+}
+
+/* ul ol 样式 */
+/* ul ol 样式 */
+ul, ol {
+    margin: 10px 0 10px 20px;
+}
+
+ol li{
+    list-style-type:decimal;
+    list-style-position:inside;
+}
+
+ul li{
+    list-style-type:disc;
+    list-style-position:inside;
+}

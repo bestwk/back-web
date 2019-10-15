@@ -1,0 +1,335 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cheng.zhuo.electronicpos.manage.member.MemberMapper">
+    <resultMap id="BaseResultMap" type="com.cheng.zhuo.electronicpos.manage.member.Member">
+        <id column="id" jdbcType="BIGINT" property="id" />
+        <result column="vip_code" jdbcType="VARCHAR" property="vipCode" />
+        <result column="vip_name" jdbcType="VARCHAR" property="vipName" />
+        <result column="note" jdbcType="VARCHAR" property="note" />
+        <result column="phone" jdbcType="VARCHAR" property="phone" />
+        <result column="vip_grade" jdbcType="TINYINT" property="vipGrade" />
+        <result column="integral" jdbcType="INTEGER" property="integral" />
+        <result column="balance"  property="balance" />
+        <result column="store_id" jdbcType="BIGINT" property="storeId" />
+        <result column="physical_store_id" jdbcType="BIGINT" property="physicalStoreId" />
+        <result column="come_from" jdbcType="TINYINT" property="comeFrom" />
+        <result column="vip_time" jdbcType="TIMESTAMP" property="vipTime" />
+        <result column="status" jdbcType="TINYINT" property="status" />
+        <result column="union_id" jdbcType="VARCHAR" property="unionId" />
+        <result column="open_id" jdbcType="VARCHAR" property="openId" />
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+        <result column="operator_id" jdbcType="VARCHAR" property="operatorId" />
+        <result column="birthday" jdbcType="TIMESTAMP" property="birthday" />
+        <result column="delete_reason" jdbcType="VARCHAR" property="deleteReason" />
+        <result column="storeName" jdbcType="VARCHAR" property="storeName" />
+        <result column="operatorName" jdbcType="VARCHAR" property="operatorName" />
+        <result column="total_amount" jdbcType="VARCHAR" property="totalAmount" />
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, vip_code, vip_name, note, phone, vip_grade, integral, balance, store_id, physical_store_id,
+    come_from, vip_time, status, union_id, open_id, create_time, operator_id, birthday,
+    delete_reason
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from t_mds_member
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from t_mds_member
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+    <insert id="insert" parameterType="com.cheng.zhuo.electronicpos.manage.member.Member">
+    insert into t_mds_member (id, vip_code, vip_name,
+      note, phone, vip_grade,
+      integral, balance, store_id,
+      physical_store_id, come_from, vip_time,
+      status, union_id, open_id,
+      create_time, operator_id, birthday,
+      delete_reason)
+    values (#{id,jdbcType=BIGINT}, #{vipCode,jdbcType=VARCHAR}, #{vipName,jdbcType=VARCHAR},
+      #{note,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{vipGrade,jdbcType=TINYINT},
+      #{integral,jdbcType=INTEGER}, #{balance,jdbcType=DECIMAL}, #{storeId,jdbcType=BIGINT},
+      #{physicalStoreId,jdbcType=BIGINT}, #{comeFrom,jdbcType=TINYINT}, #{vipTime,jdbcType=TIMESTAMP},
+      #{status,jdbcType=TINYINT}, #{unionId,jdbcType=VARCHAR}, #{openId,jdbcType=VARCHAR},
+      #{createTime,jdbcType=TIMESTAMP}, #{operatorId,jdbcType=VARCHAR}, #{birthday,jdbcType=TIMESTAMP},
+      #{deleteReason,jdbcType=VARCHAR})
+  </insert>
+    <insert id="insertSelective" parameterType="com.cheng.zhuo.electronicpos.manage.member.Member">
+        insert into t_mds_member
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="vipCode != null">
+                vip_code,
+            </if>
+            <if test="vipName != null">
+                vip_name,
+            </if>
+            <if test="note != null">
+                note,
+            </if>
+            <if test="phone != null">
+                phone,
+            </if>
+            <if test="vipGrade != null">
+                vip_grade,
+            </if>
+            <if test="integral != null">
+                integral,
+            </if>
+            <if test="balance != null">
+                balance,
+            </if>
+            <if test="storeId != null">
+                store_id,
+            </if>
+            <if test="physicalStoreId != null">
+                physical_store_id,
+            </if>
+            <if test="comeFrom != null">
+                come_from,
+            </if>
+            <if test="vipTime != null">
+                vip_time,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="unionId != null">
+                union_id,
+            </if>
+            <if test="openId != null">
+                open_id,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="operatorId != null">
+                operator_id,
+            </if>
+            <if test="birthday != null">
+                birthday,
+            </if>
+            <if test="deleteReason != null">
+                delete_reason,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="vipCode != null">
+                #{vipCode,jdbcType=VARCHAR},
+            </if>
+            <if test="vipName != null">
+                #{vipName,jdbcType=VARCHAR},
+            </if>
+            <if test="note != null">
+                #{note,jdbcType=VARCHAR},
+            </if>
+            <if test="phone != null">
+                #{phone,jdbcType=VARCHAR},
+            </if>
+            <if test="vipGrade != null">
+                #{vipGrade,jdbcType=TINYINT},
+            </if>
+            <if test="integral != null">
+                #{integral,jdbcType=INTEGER},
+            </if>
+            <if test="balance != null">
+                #{balance,jdbcType=DECIMAL},
+            </if>
+            <if test="storeId != null">
+                #{storeId,jdbcType=BIGINT},
+            </if>
+            <if test="physicalStoreId != null">
+                #{physicalStoreId,jdbcType=BIGINT},
+            </if>
+            <if test="comeFrom != null">
+                #{comeFrom,jdbcType=TINYINT},
+            </if>
+            <if test="vipTime != null">
+                #{vipTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=TINYINT},
+            </if>
+            <if test="unionId != null">
+                #{unionId,jdbcType=VARCHAR},
+            </if>
+            <if test="openId != null">
+                #{openId,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="operatorId != null">
+                #{operatorId,jdbcType=VARCHAR},
+            </if>
+            <if test="birthday != null">
+                #{birthday,jdbcType=TIMESTAMP},
+            </if>
+            <if test="deleteReason != null">
+                #{deleteReason,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.cheng.zhuo.electronicpos.manage.member.Member">
+        update t_mds_member
+        <set>
+            <if test="vipCode != null">
+                vip_code = #{vipCode,jdbcType=VARCHAR},
+            </if>
+            <if test="vipName != null">
+                vip_name = #{vipName,jdbcType=VARCHAR},
+            </if>
+            <if test="note != null">
+                note = #{note,jdbcType=VARCHAR},
+            </if>
+            <if test="phone != null">
+                phone = #{phone,jdbcType=VARCHAR},
+            </if>
+            <if test="vipGrade != null">
+                vip_grade = #{vipGrade,jdbcType=TINYINT},
+            </if>
+            <if test="integral != null">
+                integral = #{integral,jdbcType=INTEGER},
+            </if>
+            <if test="balance != null">
+                balance = #{balance,jdbcType=DECIMAL},
+            </if>
+            <if test="storeId != null">
+                store_id = #{storeId,jdbcType=BIGINT},
+            </if>
+            <if test="physicalStoreId != null">
+                physical_store_id = #{physicalStoreId,jdbcType=BIGINT},
+            </if>
+            <if test="comeFrom != null">
+                come_from = #{comeFrom,jdbcType=TINYINT},
+            </if>
+            <if test="vipTime != null">
+                vip_time = #{vipTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=TINYINT},
+            </if>
+            <if test="unionId != null">
+                union_id = #{unionId,jdbcType=VARCHAR},
+            </if>
+            <if test="openId != null">
+                open_id = #{openId,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="operatorId != null">
+                operator_id = #{operatorId,jdbcType=VARCHAR},
+            </if>
+            <if test="birthday != null">
+                birthday = #{birthday,jdbcType=TIMESTAMP},
+            </if>
+            <if test="deleteReason != null">
+                delete_reason = #{deleteReason,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.cheng.zhuo.electronicpos.manage.member.Member">
+    update t_mds_member
+    set vip_code = #{vipCode,jdbcType=VARCHAR},
+      vip_name = #{vipName,jdbcType=VARCHAR},
+      note = #{note,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      vip_grade = #{vipGrade,jdbcType=TINYINT},
+      integral = #{integral,jdbcType=INTEGER},
+      balance = #{balance,jdbcType=DECIMAL},
+      store_id = #{storeId,jdbcType=BIGINT},
+      physical_store_id = #{physicalStoreId,jdbcType=BIGINT},
+      come_from = #{comeFrom,jdbcType=TINYINT},
+      vip_time = #{vipTime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=TINYINT},
+      union_id = #{unionId,jdbcType=VARCHAR},
+      open_id = #{openId,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      operator_id = #{operatorId,jdbcType=VARCHAR},
+      birthday = #{birthday,jdbcType=TIMESTAMP},
+      delete_reason = #{deleteReason,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <select id="getMemberList" resultMap="BaseResultMap">
+    select
+      b.id, b.vip_code, b.vip_name, b.note, b.phone, b.vip_grade, b.integral, b.balance, b.store_id, b.physical_store_id,
+    b.come_from, b.vip_time, b.status, b.union_id, b.open_id, b.create_time, b.operator_id,b.birthday,b.delete_reason,
+    (select name from t_mps_physical_store a where a.id = b.physical_store_id) as storeName,
+    (select name from t_mep_employees c where c.id = b.operator_id) as operatorName,
+    (select sum(pay_amount)  from t_mds_order o where is_vip_pay = true and pay_type = 3 and o.vip_id = b.id)  as total_amount
+    from t_mds_member b
+    where
+    b.store_id = #{storeId}
+  <if test="status != null and status !='' ">
+      and   b.status= #{status}
+  </if>
+  <if test="physicalStoreId != null and physicalStoreId !='' ">
+      and   b.physical_store_id= #{physicalStoreId}
+  </if>
+  <if test="operatorId != null and operatorId !='' ">
+      and   operator_id= #{operatorId}
+  </if>
+  <if test="phone != null and phone !='' ">
+      and   phone= #{phone}
+  </if>
+  <if test="startTime != null and startTime !='' ">
+      and   DATE_FORMAT(b.vip_time,'%Y-%m-%d') &gt;= #{startTime}
+  </if>
+  <if test="endTime != null and endTime !='' ">
+      and   DATE_FORMAT(b.vip_time,'%Y-%m-%d')  &lt;= #{endTime}
+  </if>
+  </select>
+
+    <select id="getDeleteMemberList" resultMap="BaseResultMap">
+    select
+      b.id, b.vip_code, b.vip_name, b.note, b.phone, b.vip_grade, b.integral, b.balance, b.store_id, b.physical_store_id,
+    b.come_from, b.vip_time, b.status, b.union_id, b.open_id, b.create_time, b.operator_id,b.birthday,b.delete_reason,
+    (select name from t_mps_physical_store a where a.id = b.physical_store_id) as storeName,
+    (select name from t_mep_employees c where c.id = b.operator_id) as operatorName
+    from t_mds_member b
+    where
+    b.store_id = #{storeId}
+    and
+    b.status = 0
+  </select>
+
+    <update id="deleteByMap" parameterType="hashmap">
+        update
+        t_mds_member
+        set
+        status = 0 ,
+        delete_reason = #{deleteReason},
+        delete_operator_id = #{deleteOperatorId}
+        where
+        id = #{id}
+    </update>
+    
+    <select id="selectYglistByStoreId" resultType="hashmap">
+        select
+        id+"" as id,
+        name
+        from
+        t_mep_employees
+        where
+        store_id = #{storeId}
+    </select>
+
+    <update id="qiyong">
+         update
+        t_mds_member
+        set
+        status = 1
+        where
+        id = #{id}
+    </update>
+</mapper>

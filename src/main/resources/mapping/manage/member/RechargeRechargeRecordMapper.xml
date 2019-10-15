@@ -1,0 +1,344 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cheng.zhuo.electronicpos.manage.member.RechargeRechargeRecordMapper">
+  <resultMap id="BaseResultMap" type="com.cheng.zhuo.electronicpos.manage.member.RechargeRechargeRecord">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="member_id" jdbcType="BIGINT" property="memberId" />
+    <result column="amount" jdbcType="DECIMAL" property="amount" />
+    <result column="creat_at" jdbcType="TIMESTAMP" property="creatAt" />
+    <result column="operator_id" jdbcType="BIGINT" property="operatorId" />
+    <result column="operator_type" jdbcType="TINYINT" property="operatorType" />
+    <result column="pay_type" jdbcType="TINYINT" property="payType" />
+    <result column="before_balance" jdbcType="DECIMAL" property="beforeBalance" />
+    <result column="after_balance" jdbcType="DECIMAL" property="afterBalance" />
+    <result column="zs_amount" jdbcType="DECIMAL" property="zsAmount" />
+    <result column="cz_amount" jdbcType="DECIMAL" property="czAmount" />
+    <result column="store_id" jdbcType="VARCHAR" property="storeId" />
+    <result column="notes" jdbcType="VARCHAR" property="notes" />
+    <result column="physical_store_id" jdbcType="VARCHAR" property="physicalStoreId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, member_id, amount, creat_at, operator_id, operator_type, pay_type, before_balance, 
+    after_balance, zs_amount, cz_amount, store_id, notes, physical_store_id
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_mds_recharge_record
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from t_mds_recharge_record
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.cheng.zhuo.electronicpos.manage.member.RechargeRechargeRecord">
+    insert into t_mds_recharge_record (id, member_id, amount, 
+      creat_at, operator_id, operator_type, 
+      pay_type, before_balance, after_balance, 
+      zs_amount, cz_amount, store_id, 
+      notes, physical_store_id)
+    values (#{id,jdbcType=BIGINT}, #{memberId,jdbcType=BIGINT}, #{amount,jdbcType=DECIMAL}, 
+      #{creatAt,jdbcType=TIMESTAMP}, #{operatorId,jdbcType=BIGINT}, #{operatorType,jdbcType=TINYINT}, 
+      #{payType,jdbcType=TINYINT}, #{beforeBalance,jdbcType=DECIMAL}, #{afterBalance,jdbcType=DECIMAL}, 
+      #{zsAmount,jdbcType=DECIMAL}, #{czAmount,jdbcType=DECIMAL}, #{storeId,jdbcType=VARCHAR}, 
+      #{notes,jdbcType=VARCHAR}, #{physicalStoreId,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cheng.zhuo.electronicpos.manage.member.RechargeRechargeRecord">
+    insert into t_mds_recharge_record
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="memberId != null">
+        member_id,
+      </if>
+      <if test="amount != null">
+        amount,
+      </if>
+        creat_at,
+      <if test="operatorId != null">
+        operator_id,
+      </if>
+      <if test="operatorType != null">
+        operator_type,
+      </if>
+      <if test="payType != null">
+        pay_type,
+      </if>
+      <if test="beforeBalance != null">
+        before_balance,
+      </if>
+      <if test="afterBalance != null">
+        after_balance,
+      </if>
+      <if test="zsAmount != null">
+        zs_amount,
+      </if>
+      <if test="czAmount != null">
+        cz_amount,
+      </if>
+      <if test="storeId != null">
+        store_id,
+      </if>
+      <if test="notes != null">
+        notes,
+      </if>
+      <if test="physicalStoreId != null">
+        physical_store_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="memberId != null">
+        #{memberId,jdbcType=BIGINT},
+      </if>
+      <if test="amount != null">
+        #{amount,jdbcType=DECIMAL},
+      </if>
+        #{creatAt},
+      <if test="operatorId != null">
+        #{operatorId,jdbcType=BIGINT},
+      </if>
+      <if test="operatorType != null">
+        #{operatorType,jdbcType=TINYINT},
+      </if>
+      <if test="payType != null">
+        #{payType,jdbcType=TINYINT},
+      </if>
+      <if test="beforeBalance != null">
+        #{beforeBalance,jdbcType=DECIMAL},
+      </if>
+      <if test="afterBalance != null">
+        #{afterBalance,jdbcType=DECIMAL},
+      </if>
+      <if test="zsAmount != null">
+        #{zsAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="czAmount != null">
+        #{czAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="storeId != null">
+        #{storeId,jdbcType=VARCHAR},
+      </if>
+      <if test="notes != null">
+        #{notes,jdbcType=VARCHAR},
+      </if>
+      <if test="physicalStoreId != null">
+        #{physicalStoreId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cheng.zhuo.electronicpos.manage.member.RechargeRechargeRecord">
+    update t_mds_recharge_record
+    <set>
+      <if test="memberId != null">
+        member_id = #{memberId,jdbcType=BIGINT},
+      </if>
+      <if test="amount != null">
+        amount = #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="creatAt != null">
+        creat_at = #{creatAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operatorId != null">
+        operator_id = #{operatorId,jdbcType=BIGINT},
+      </if>
+      <if test="operatorType != null">
+        operator_type = #{operatorType,jdbcType=TINYINT},
+      </if>
+      <if test="payType != null">
+        pay_type = #{payType,jdbcType=TINYINT},
+      </if>
+      <if test="beforeBalance != null">
+        before_balance = #{beforeBalance,jdbcType=DECIMAL},
+      </if>
+      <if test="afterBalance != null">
+        after_balance = #{afterBalance,jdbcType=DECIMAL},
+      </if>
+      <if test="zsAmount != null">
+        zs_amount = #{zsAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="czAmount != null">
+        cz_amount = #{czAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="storeId != null">
+        store_id = #{storeId,jdbcType=VARCHAR},
+      </if>
+      <if test="notes != null">
+        notes = #{notes,jdbcType=VARCHAR},
+      </if>
+      <if test="physicalStoreId != null">
+        physical_store_id = #{physicalStoreId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cheng.zhuo.electronicpos.manage.member.RechargeRechargeRecord">
+    update t_mds_recharge_record
+    set member_id = #{memberId,jdbcType=BIGINT},
+      amount = #{amount,jdbcType=DECIMAL},
+      creat_at = #{creatAt,jdbcType=TIMESTAMP},
+      operator_id = #{operatorId,jdbcType=BIGINT},
+      operator_type = #{operatorType,jdbcType=TINYINT},
+      pay_type = #{payType,jdbcType=TINYINT},
+      before_balance = #{beforeBalance,jdbcType=DECIMAL},
+      after_balance = #{afterBalance,jdbcType=DECIMAL},
+      zs_amount = #{zsAmount,jdbcType=DECIMAL},
+      cz_amount = #{czAmount,jdbcType=DECIMAL},
+      store_id = #{storeId,jdbcType=VARCHAR},
+      notes = #{notes,jdbcType=VARCHAR},
+      physical_store_id = #{physicalStoreId,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <select id="getEmployee" resultType="com.cheng.zhuo.electronicpos.manage.employees.Employees">
+    select id,name from t_mep_employees
+    where store_id = #{storeId}
+  </select>
+  <select id="findRecharge" resultType="com.cheng.zhuo.electronicpos.manage.member.RechargeRechargeRecord">
+    select
+    <include refid="Base_Column_List" />
+    from t_mds_recharge_record
+    where member_id = #{memberId} and store_id = #{storeId}
+  </select>
+  <select id="searchAll" resultType="com.cheng.zhuo.electronicpos.manage.member.RechargeRechargeRecord">
+    SELECT
+    tm.vip_code as vipCode,
+    tm.vip_name as vipName,
+    tm.phone as phone,
+    tr.id as id,
+    tr.member_id as memberId,
+    tr.amount as amount,
+    tr.creat_at as creatAt,
+    tr.operator_id as operatorId,
+    tr.operator_type as operatorType,
+    tr.pay_type as payType,
+    tr.before_balance as beforeBalance,
+    tr.after_balance as afterBalance,
+    tr.zs_amount as zsAmount,
+    tr.cz_amount as czAmount,
+    tr.store_id as storeId,
+    tr.notes as notes,
+    tr.physical_store_id as physicalStoreId
+    FROM
+    t_mds_recharge_record tr left JOIN t_mds_member tm on  tr.member_id = tm.id
+    WHERE
+    tr.store_id = #{storeId}
+    ORDER BY
+    creat_at
+  </select>
+  <select id="searchAllByWeek" resultType="com.cheng.zhuo.electronicpos.manage.member.RechargeRechargeRecord">
+   SELECT
+    tm.vip_code as vipCode,
+    tm.vip_name as vipName,
+    tm.phone as phone,
+    tr.id as id,
+    tr.member_id as memberId,
+    tr.amount as amount,
+    tr.creat_at as creatAt,
+    tr.operator_id as operatorId,
+    tr.operator_type as operatorType,
+    tr.pay_type as payType,
+    tr.before_balance as beforeBalance,
+    tr.after_balance as afterBalance,
+    tr.zs_amount as zsAmount,
+    tr.cz_amount as czAmount,
+    tr.store_id as storeId,
+    tr.notes as notes,
+    tr.physical_store_id as physicalStoreId
+    FROM
+    t_mds_recharge_record tr left JOIN t_mds_member tm on  tr.member_id = tm.id
+    where  tr.store_id = #{storeId}
+     and DATE_SUB(CURDATE(), INTERVAL 7 DAY) &lt;= date(creat_at) order by creat_at
+  </select>
+  <select id="searchAllByMonth" resultType="com.cheng.zhuo.electronicpos.manage.member.RechargeRechargeRecord">
+   SELECT
+    tm.vip_code as vipCode,
+    tm.vip_name as vipName,
+    tm.phone as phone,
+    tr.id as id,
+    tr.member_id as memberId,
+    tr.amount as amount,
+    tr.creat_at as creatAt,
+    tr.operator_id as operatorId,
+    tr.operator_type as operatorType,
+    tr.pay_type as payType,
+    tr.before_balance as beforeBalance,
+    tr.after_balance as afterBalance,
+    tr.zs_amount as zsAmount,
+    tr.cz_amount as czAmount,
+    tr.store_id as storeId,
+    tr.notes as notes,
+    tr.physical_store_id as physicalStoreId
+    FROM
+    t_mds_recharge_record tr left JOIN t_mds_member tm on  tr.member_id = tm.id
+    where  tr.store_id = #{storeId}
+     and DATE_SUB(CURDATE(), INTERVAL 30 DAY) &lt;= date(creat_at) order by creat_at
+  </select>
+  <select id="searchAllByQuarter" resultType="com.cheng.zhuo.electronicpos.manage.member.RechargeRechargeRecord">
+  SELECT
+    tm.vip_code as vipCode,
+    tm.vip_name as vipName,
+    tm.phone as phone,
+    tr.id as id,
+    tr.member_id as memberId,
+    tr.amount as amount,
+    tr.creat_at as creatAt,
+    tr.operator_id as operatorId,
+    tr.operator_type as operatorType,
+    tr.pay_type as payType,
+    tr.before_balance as beforeBalance,
+    tr.after_balance as afterBalance,
+    tr.zs_amount as zsAmount,
+    tr.cz_amount as czAmount,
+    tr.store_id as storeId,
+    tr.notes as notes,
+    tr.physical_store_id as physicalStoreId
+    FROM
+    t_mds_recharge_record tr left JOIN t_mds_member tm on  tr.member_id = tm.id
+    where  tr.store_id = #{storeId}
+     and DATE_SUB(CURDATE(), INTERVAL 90 DAY) &lt;= date(creat_at) order by creat_at
+  </select>
+  <select id="searchAllByTime" resultType="com.cheng.zhuo.electronicpos.manage.member.RechargeRechargeRecord">
+  SELECT
+    tm.vip_code as vipCode,
+    tm.vip_name as vipName,
+    tm.phone as phone,
+    tr.id as id,
+    tr.member_id as memberId,
+    tr.amount as amount,
+    tr.creat_at as creatAt,
+    tr.operator_id as operatorId,
+    tr.operator_type as operatorType,
+    tr.pay_type as payType,
+    tr.before_balance as beforeBalance,
+    tr.after_balance as afterBalance,
+    tr.zs_amount as zsAmount,
+    tr.cz_amount as czAmount,
+    tr.store_id as storeId,
+    tr.notes as notes,
+    tr.physical_store_id as physicalStoreId
+    FROM
+    t_mds_recharge_record tr left JOIN t_mds_member tm on  tr.member_id = tm.id
+    where  tr.store_id = #{storeId}
+    <if test="startTime != null and startTime !='' ">
+      and  tr.creat_at >= #{startTime}
+    </if>
+    <if test="endTime != null and endTime !='' ">
+      and   #{endTime} >= tr.creat_at
+    </if>
+     order by creat_at
+  </select>
+
+  <select id="findMemberBalance" resultType="java.math.BigDecimal">
+    select balance from t_mds_member
+    where id = #{memberId}
+  </select>
+  <update id="updateBalance">
+    update t_mds_member
+    set balance = #{balance}
+    where id = #{memberId}
+  </update>
+</mapper>

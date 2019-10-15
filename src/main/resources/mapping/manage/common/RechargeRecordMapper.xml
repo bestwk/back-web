@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cheng.zhuo.electronicpos.manage.common.RechargeRecordMapper">
+  <resultMap id="BaseResultMap" type="com.cheng.zhuo.electronicpos.manage.common.RechargeRecord">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="member_id" jdbcType="BIGINT" property="memberId" />
+    <result column="amount" jdbcType="DECIMAL" property="amount" />
+    <result column="creat_at" jdbcType="TIMESTAMP" property="creatAt" />
+    <result column="operator_id" jdbcType="BIGINT" property="operatorId" />
+    <result column="store_id" jdbcType="VARCHAR" property="storeId" />
+    <result column="physical_store_id" jdbcType="VARCHAR" property="physicalStoreId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, member_id, amount, creat_at, operator_id, store_id, physical_store_id
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_mds_recharge_record
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from t_mds_recharge_record
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.cheng.zhuo.electronicpos.manage.common.RechargeRecord">
+    insert into t_mds_recharge_record (id, member_id, amount, 
+      creat_at, operator_id, store_id, 
+      physical_store_id)
+    values (#{id,jdbcType=BIGINT}, #{memberId,jdbcType=BIGINT}, #{amount,jdbcType=DECIMAL}, 
+      #{creatAt,jdbcType=TIMESTAMP}, #{operatorId,jdbcType=BIGINT}, #{storeId,jdbcType=VARCHAR}, 
+      #{physicalStoreId,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cheng.zhuo.electronicpos.manage.common.RechargeRecord">
+    insert into t_mds_recharge_record
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="memberId != null">
+        member_id,
+      </if>
+      <if test="amount != null">
+        amount,
+      </if>
+      <if test="creatAt != null">
+        creat_at,
+      </if>
+      <if test="operatorId != null">
+        operator_id,
+      </if>
+      <if test="storeId != null">
+        store_id,
+      </if>
+      <if test="physicalStoreId != null">
+        physical_store_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="memberId != null">
+        #{memberId,jdbcType=BIGINT},
+      </if>
+      <if test="amount != null">
+        #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="creatAt != null">
+        #{creatAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operatorId != null">
+        #{operatorId,jdbcType=BIGINT},
+      </if>
+      <if test="storeId != null">
+        #{storeId,jdbcType=VARCHAR},
+      </if>
+      <if test="physicalStoreId != null">
+        #{physicalStoreId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cheng.zhuo.electronicpos.manage.common.RechargeRecord">
+    update t_mds_recharge_record
+    <set>
+      <if test="memberId != null">
+        member_id = #{memberId,jdbcType=BIGINT},
+      </if>
+      <if test="amount != null">
+        amount = #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="creatAt != null">
+        creat_at = #{creatAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operatorId != null">
+        operator_id = #{operatorId,jdbcType=BIGINT},
+      </if>
+      <if test="storeId != null">
+        store_id = #{storeId,jdbcType=VARCHAR},
+      </if>
+      <if test="physicalStoreId != null">
+        physical_store_id = #{physicalStoreId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cheng.zhuo.electronicpos.manage.common.RechargeRecord">
+    update t_mds_recharge_record
+    set member_id = #{memberId,jdbcType=BIGINT},
+      amount = #{amount,jdbcType=DECIMAL},
+      creat_at = #{creatAt,jdbcType=TIMESTAMP},
+      operator_id = #{operatorId,jdbcType=BIGINT},
+      store_id = #{storeId,jdbcType=VARCHAR},
+      physical_store_id = #{physicalStoreId,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <select id="selectCzsr" resultType="String">
+    select
+    ifnull(sum(cz_amount),0)
+    from
+    t_mds_recharge_record
+    where
+    store_id = #{storeId}
+    <if test="startTime != null and startTime !='' ">
+      and  creat_at >= #{startTime}
+    </if>
+    <if test="endTime != null and endTime !='' ">
+      and   #{endTime} >= creat_at
+    </if>
+    <if test="physicalStoreIdList != null and physicalStoreIdList!=''">
+      and physical_store_id in
+      <foreach collection="physicalStoreIdList" index="index" item="item" open="(" separator="," close=")">
+        #{item}
+      </foreach>
+    </if>
+  </select>
+
+  <select id="selectRqCzsr" resultType="hashmap">
+    select
+    DATE_FORMAT(creat_at,'%Y-%m-%d') as rq,
+    ifnull(sum(cz_amount),0) as czsr
+    from
+    t_mds_recharge_record
+    where
+    store_id = #{storeId}
+    <if test="startTime != null and startTime !='' ">
+      and  creat_at >= #{startTime}
+    </if>
+    <if test="endTime != null and endTime !='' ">
+      and   #{endTime} >= creat_at
+    </if>
+    <if test="startRangeTime != null and startRangeTime !='' ">
+      and   DATE_FORMAT(creat_at,'%T') >= #{startRangeTime}
+    </if>
+    <if test="endRangeTime != null and endRangeTime !='' ">
+      and   #{endRangeTime} >= DATE_FORMAT(creat_at,'%T')
+    </if>
+    <if test="physicalStoreIdList != null and physicalStoreIdList!=''">
+      and physical_store_id in
+      <foreach collection="physicalStoreIdList" index="index" item="item" open="(" separator="," close=")">
+        #{item}
+      </foreach>
+    </if>
+    group by rq
+    order by rq desc
+  </select>
+
+  <select id="selectDpCzsr" resultType="hashmap">
+    select
+    physical_store_id as id,
+    ifnull(sum(cz_amount),0) as czsr
+    from
+    t_mds_recharge_record
+    where
+    store_id = #{storeId}
+    <if test="startTime != null and startTime !='' ">
+      and  creat_at >= #{startTime}
+    </if>
+    <if test="endTime != null and endTime !='' ">
+      and   #{endTime} >= creat_at
+    </if>
+    <if test="startRangeTime != null and startRangeTime !='' ">
+      and   DATE_FORMAT(creat_at,'%T') >= #{startRangeTime}
+    </if>
+    <if test="endRangeTime != null and endRangeTime !='' ">
+      and   #{endRangeTime} >= DATE_FORMAT(creat_at,'%T')
+    </if>
+    <if test="physicalStoreIdList != null and physicalStoreIdList!=''">
+      and physical_store_id in
+      <foreach collection="physicalStoreIdList" index="index" item="item" open="(" separator="," close=")">
+        #{item}
+      </foreach>
+    </if>
+    group by id
+  </select>
+
+  <insert id="insertByMap" parameterType="hashmap">
+    insert into t_mds_recharge_record ( member_id, amount,creat_at,operator_id,
+    operator_type,pay_type,before_balance,after_balance,zs_amount,cz_amount,notes,
+     store_id,
+      physical_store_id)
+    values ( #{member_id}, #{amount},#{creat_at},#{operator_id},
+      #{operator_type},#{pay_type},#{before_balance},#{after_balance},#{zs_amount},#{cz_amount},#{notes},
+      #{store_id},
+      #{physical_store_id})
+  </insert>
+</mapper>

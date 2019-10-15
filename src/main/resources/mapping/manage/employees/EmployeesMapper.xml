@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cheng.zhuo.electronicpos.manage.employees.EmployeesMapper">
+  <resultMap id="BaseResultMap" type="com.cheng.zhuo.electronicpos.manage.employees.Employees">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="store_id" jdbcType="BIGINT" property="storeId" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="physical_store_id" jdbcType="BIGINT" property="physicalStoreId" />
+    <result column="physical_store_name" jdbcType="VARCHAR" property="physicalStoreName" />
+    <result column="emp_no" jdbcType="VARCHAR" property="empNo" />
+    <result column="duty" jdbcType="VARCHAR" property="duty" />
+    <result column="birthday" jdbcType="DATE" property="birthday" />
+    <result column="gender" jdbcType="TINYINT" property="gender" />
+    <result column="role" jdbcType="VARCHAR" property="role" />
+    <result column="role_name" jdbcType="VARCHAR" property="roleName" />
+    <result column="is_enabled" jdbcType="BIT" property="isEnabled" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, store_id, name, phone, physical_store_id, physical_store_name, emp_no, duty, 
+    birthday, gender, role, role_name, is_enabled, status
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_mep_employees
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from t_mep_employees
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.cheng.zhuo.electronicpos.manage.employees.Employees">
+    insert into t_mep_employees (id, store_id, name, 
+      phone, physical_store_id, physical_store_name, 
+      emp_no, duty, birthday, 
+      gender, role, role_name, 
+      is_enabled, status)
+    values (#{id,jdbcType=BIGINT}, #{storeId,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, 
+      #{phone,jdbcType=VARCHAR}, #{physicalStoreId,jdbcType=BIGINT}, #{physicalStoreName,jdbcType=VARCHAR}, 
+      #{empNo,jdbcType=VARCHAR}, #{duty,jdbcType=VARCHAR}, #{birthday,jdbcType=DATE}, 
+      #{gender,jdbcType=TINYINT}, #{role,jdbcType=VARCHAR}, #{roleName,jdbcType=VARCHAR}, 
+      #{isEnabled,jdbcType=BIT}, #{status,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cheng.zhuo.electronicpos.manage.employees.Employees">
+    insert into t_mep_employees
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="storeId != null">
+        store_id,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="physicalStoreId != null">
+        physical_store_id,
+      </if>
+      <if test="physicalStoreName != null">
+        physical_store_name,
+      </if>
+      <if test="empNo != null">
+        emp_no,
+      </if>
+      <if test="duty != null">
+        duty,
+      </if>
+      <if test="birthday != null">
+        birthday,
+      </if>
+      <if test="gender != null">
+        gender,
+      </if>
+      <if test="role != null">
+        role,
+      </if>
+      <if test="roleName != null">
+        role_name,
+      </if>
+      <if test="isEnabled != null">
+        is_enabled,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="storeId != null">
+        #{storeId,jdbcType=BIGINT},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="physicalStoreId != null">
+        #{physicalStoreId,jdbcType=BIGINT},
+      </if>
+      <if test="physicalStoreName != null">
+        #{physicalStoreName,jdbcType=VARCHAR},
+      </if>
+      <if test="empNo != null">
+        #{empNo,jdbcType=VARCHAR},
+      </if>
+      <if test="duty != null">
+        #{duty,jdbcType=VARCHAR},
+      </if>
+      <if test="birthday != null">
+        #{birthday,jdbcType=DATE},
+      </if>
+      <if test="gender != null">
+        #{gender,jdbcType=TINYINT},
+      </if>
+      <if test="role != null">
+        #{role,jdbcType=VARCHAR},
+      </if>
+      <if test="roleName != null">
+        #{roleName,jdbcType=VARCHAR},
+      </if>
+      <if test="isEnabled != null">
+        #{isEnabled,jdbcType=BIT},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cheng.zhuo.electronicpos.manage.employees.Employees">
+    update t_mep_employees
+    <set>
+      <if test="storeId != null">
+        store_id = #{storeId,jdbcType=BIGINT},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="physicalStoreId != null">
+        physical_store_id = #{physicalStoreId,jdbcType=BIGINT},
+      </if>
+      <if test="physicalStoreName != null">
+        physical_store_name = #{physicalStoreName,jdbcType=VARCHAR},
+      </if>
+      <if test="empNo != null">
+        emp_no = #{empNo,jdbcType=VARCHAR},
+      </if>
+      <if test="duty != null">
+        duty = #{duty,jdbcType=VARCHAR},
+      </if>
+      <if test="birthday != null">
+        birthday = #{birthday,jdbcType=DATE},
+      </if>
+      <if test="gender != null">
+        gender = #{gender,jdbcType=TINYINT},
+      </if>
+      <if test="role != null">
+        role = #{role,jdbcType=VARCHAR},
+      </if>
+      <if test="roleName != null">
+        role_name = #{roleName,jdbcType=VARCHAR},
+      </if>
+      <if test="isEnabled != null">
+        is_enabled = #{isEnabled,jdbcType=BIT},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=TINYINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cheng.zhuo.electronicpos.manage.employees.Employees">
+    update t_mep_employees
+    set store_id = #{storeId,jdbcType=BIGINT},
+      name = #{name,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      physical_store_id = #{physicalStoreId,jdbcType=BIGINT},
+      physical_store_name = #{physicalStoreName,jdbcType=VARCHAR},
+      emp_no = #{empNo,jdbcType=VARCHAR},
+      duty = #{duty,jdbcType=VARCHAR},
+      birthday = #{birthday,jdbcType=DATE},
+      gender = #{gender,jdbcType=TINYINT},
+      role = #{role,jdbcType=VARCHAR},
+      role_name = #{roleName,jdbcType=VARCHAR},
+      is_enabled = #{isEnabled,jdbcType=BIT},
+      status = #{status,jdbcType=TINYINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="findAllList" resultType="com.cheng.zhuo.electronicpos.manage.employees.Employees">
+    select
+    *
+    from t_mep_employees
+    where 1 = 1
+    <if test="findName != ''">
+      and  name like CONCAT('%',#{findName},'%')
+    </if>
+  </select>
+  <select id="findById" resultType="com.cheng.zhuo.electronicpos.manage.employees.Employees">
+     select
+     *
+    from t_mep_employees
+    where id = #{id}
+  </select>
+  <delete id="doDeleteBatchResouces">
+    delete from  t_mep_employees
+    where id in
+    <foreach collection="list"
+             open="("
+             close=")"
+             separator=","
+             item="item">
+      #{item}
+    </foreach>
+  </delete>
+  <select id="findByBusinessId" resultType="com.cheng.zhuo.electronicpos.manage.store.PhysicalStore">
+    select * from t_mps_physical_store
+    where store_id = #{businessId}
+    <if test="shopName != ''">
+      and  name like CONCAT('%',#{shopName},'%')
+    </if>
+  </select>
+  <select id="findRoleByCode" resultType="com.cheng.zhuo.electronicpos.manage.common.Parameters">
+        select * from t_mst_parameters
+        where type = #{type}
+    </select>
+</mapper>

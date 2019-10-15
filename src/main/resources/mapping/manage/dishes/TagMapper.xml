@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cheng.zhuo.electronicpos.manage.dishes.TagMapper">
+  <resultMap id="BaseResultMap" type="com.cheng.zhuo.electronicpos.manage.dishes.Tag">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="dishes_id" jdbcType="BIGINT" property="dishesId" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="taste" jdbcType="VARCHAR" property="taste" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, dishes_id, name, taste
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_mds_tag
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from t_mds_tag
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.cheng.zhuo.electronicpos.manage.dishes.Tag">
+    insert into t_mds_tag (id, dishes_id, name, 
+      taste)
+    values (#{id,jdbcType=BIGINT}, #{dishesId,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, 
+      #{taste,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cheng.zhuo.electronicpos.manage.dishes.Tag">
+    insert into t_mds_tag
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="dishesId != null">
+        dishes_id,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="taste != null">
+        taste,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="dishesId != null">
+        #{dishesId,jdbcType=BIGINT},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="taste != null">
+        #{taste,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cheng.zhuo.electronicpos.manage.dishes.Tag">
+    update t_mds_tag
+    <set>
+      <if test="dishesId != null">
+        dishes_id = #{dishesId,jdbcType=BIGINT},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="taste != null">
+        taste = #{taste,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cheng.zhuo.electronicpos.manage.dishes.Tag">
+    update t_mds_tag
+    set dishes_id = #{dishesId,jdbcType=BIGINT},
+      name = #{name,jdbcType=VARCHAR},
+      taste = #{taste,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cheng.zhuo.electronicpos.app.areas.AppAreasMapper">
+  <resultMap id="BaseResultMap" type="com.cheng.zhuo.electronicpos.app.areas.AppAreas">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="physical_store_id" jdbcType="BIGINT" property="physicalStoreId" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="sort" jdbcType="INTEGER" property="sort" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, physical_store_id, name, sort, status
+  </sql>
+  <select id="findByPhysicalStoreId" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_mtb_areas
+    where physical_store_id = #{physicalStoreId}
+    and status = 0
+    order by sort
+  </select>
+
+</mapper>
